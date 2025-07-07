@@ -3,28 +3,71 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
         <link href='css/styles.css' rel='stylesheet'>
         <title>Fodos</title>
+    </head> 
     <body>
         <div class="container">
-            <nav>Navbar</nav> <!--boutton accueil et dark mode-->
-            <main>Main
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </main> <!--dernières randos en page d'accueil sinon liste selon tri-->
-            <div class="sidebar">Sidebar
-                <ul class="sidebar">
-                    <li class="sidebar">Année</li>
-                    <li class="sidebar">Lieu</li>
-                    <li class="sidebar">Difficulté</li>
-                    <li class="sidebar">Intérêt</li>
-                </ul>
-            </div> <!--menu pour trier randos-->
-            <div id="gallery">Gallery</div> <!--appercçu sur la page d'accueil et gallery sur détails-->
+            <nav>
+                <div><img class="img-navbar" id="img-logo" src="assets/Design_plat_Appareil_photo_vert.svg.png" alt="logo"></div>
+                <div class="title">
+                <h1>Fodos</h1>
+                <h4>Mon blog photos & randos</h4>
+                </div>
+                <div><img  class="img-navbar" id="img-illustration" src="assets/4328351-removebg-preview.png" alt="illustration"></div>
+            </nav> <!--bouton accueil et dark mode-->
+             <aside class="sidebar">
+                 <li class="sidebar">
+                    <a href="#click" class="menu">
+                        <h4 class="menu-title">Massif</h4>
+                            <ul class="menu-dropdown">
+                                <li>Vercors</li>
+                                <li>Giffre</li>
+                                <li>Dévoluy</li>
+                            </ul></a></li>
+                    <li class="sidebar">
+                    <a href="#click" class="menu">
+                        <h4 class="menu-title">Date</h4>
+                            <ul class="menu-dropdown">
+                            </ul></a></li>
+                     <li class="sidebar">
+                    <a href="#click" class="menu">
+                        <h4 class="menu-title">Difficulté</h4>
+                            <ul class="menu-dropdown">
+                                <li>Facile</li>
+                                <li>Moyen</li>
+                                <li>Difficile</li>
+                            </ul></a></li>
+                     <li class="sidebar">
+                    <a href="#click" class="menu">
+                        <h4 class="menu-title">Intérêt</h4>
+                            <ul class="menu-dropdown">
+                                <li>Faible</li>
+                                <li>Moyen</li>
+                                <li>Fort</li>
+                            </ul></a></li>
+                    <li class="sidebar">
+                    <a href="#click" class="menu">
+                        <h4 class="menu-title">Tags</h4>
+                            <ul class="menu-dropdown">
+                                <li>Lac</li>
+                                <li>Bouquetins</li>
+                                <li>Raquettes</li>
+                            </ul></a></li>
+                <div></div><!--bouton avance-->
+            </aside> <!--menu pour trier randos-->
+            <section class="gallery">
+                <div class="bloc" id="gallery-1">photo1</div>
+                <div class="bloc active" id="gallery-2">photo2</div>
+                <div class="bloc" id="gallery-3">photo3</div>
+                <div class="bloc" id="gallery-4">photo4</div>    
+            </section> <!--apercçu sur la page d'accueil et gallery sur détails-->
+           <!--dernières randos en page d'accueil sinon liste selon tri-->
             <footer>Footer</footer>
         </div>  
-    </body>    
+    </body>  
+     <script src="script.js"></script>
+    
 </html>
