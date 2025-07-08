@@ -25,3 +25,10 @@ buttons.forEach(btn => {
         e.stopPropagation();
     })
 })
+
+/*document.querySelectorAll('.gallery').forEach(gallery => {
+    gallery.addEventListener('click', () => {
+      document.querySelectorAll('.gallery').forEach(g => g.classList.remove('active'));
+      gallery.classList.add('active');
+    });
+  });*/
