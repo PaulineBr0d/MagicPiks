@@ -48,6 +48,7 @@ nav{
     right:2%;
 }
 
+
 .title {
     font-family: 'Open Sans', sans-serif;
     color:#00B18A; 
@@ -70,7 +71,6 @@ nav{
 
 .sidebar {
     grid-area: sidebar;
- 
     background: #000000;
     font-size: 20px;
     letter-spacing: 2px;
@@ -102,12 +102,12 @@ a {
 .menu-title {
   display: block;
   padding: 5px;
-  justify-content: center;
   width: 200px;
   background-color: #575454;
   color: #FFFEFE;
   transition: background-color 0.3s ease, transform 0.2s ease;
   position: relative;
+  text-align: left;
 }
 
 .menu-title:hover {
@@ -115,7 +115,7 @@ a {
   transform: translateY(-2px);
 }
 
-.menu-title:before,
+/*.menu-title:before,
 .menu-title:after {
   content: "";
   position: absolute;
@@ -134,7 +134,7 @@ a {
 .menu-title:after {
   bottom: 0;
   border-bottom: 0 solid transparent;
-}
+}*/
 
 .menu:hover > .menu-title:after {
   border-bottom-width: 4px;
@@ -177,7 +177,6 @@ a {
 
 .menu-dropdown > *:hover {
   background-color: #575454;
-  color: white;
 }
 
 .menu:not(:hover) > .menu-dropdown > * {
@@ -185,7 +184,7 @@ a {
   height: 0;
   padding: 0;
   margin: 0;
-  color: rgba(25, 25, 25, 0);
+  color: #000000;
   transition:
     height 0.3s ease,
     padding 0.3s ease,
@@ -223,7 +222,41 @@ footer{
     background: #00B18A;
     grid-area: footer;
 }
-
+.menu-tag:before {
+    content : "\f02b";
+    margin-right: 8px;
+    font-family: "Font Awesome 6 Free"; /* Ou "FontAwesome" selon la version */
+    font-weight: 900; /* Nécessaire pour les icônes "Solid" */
+    color: #FFFEFE;
+}
+.menu-location:before {
+    content : "\f124";
+    margin-right: 8px;
+    font-family: "Font Awesome 6 Free"; /* Ou "FontAwesome" selon la version */
+    font-weight: 900; /* Nécessaire pour les icônes "Solid" */
+    color: #FFFEFE;
+}
+.menu-calendar:before {
+    content : "\f073";
+    margin-right: 8px;
+    font-family: "Font Awesome 6 Free"; /* Ou "FontAwesome" selon la version */
+    font-weight: 400; /* Nécessaire pour les icônes "Solid" */
+    color: #FFFEFE;
+}
+.menu-difficult:before {
+    content : "\f201";
+    margin-right: 8px;
+    font-family: "Font Awesome 6 Free"; /* Ou "FontAwesome" selon la version */
+    font-weight: 900; /* Nécessaire pour les icônes "Solid" */
+    color: #FFFEFE;
+}
+.menu-heart:before {
+    content : "\f08a";
+    margin-right: 8px;
+    font-family: "Font Awesome 6 Free"; /* Ou "FontAwesome" selon la version */
+    font-weight: 400; /* Nécessaire pour les icônes "Solid" */
+    color: #FFFEFE;
+}
 /*
 @media screen and (max-width:350px) {
     .container{
