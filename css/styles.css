@@ -274,12 +274,17 @@ footer{
     
 }
 
-.bloc > h3 {
-    background: transparent;
+.blur> h3 {
+    position: absolute;
     color: white;
     font-style: italic;
+    z-index: 100;
+   
 }
-
+.blur{
+    filter:blur(4px);
+    padding: 10px;
+}
 /*
 @media screen and (max-width:350px) {
     .container{
