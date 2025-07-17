@@ -1,0 +1,62 @@
+/* Base */
+.base{
+    position: absolute;
+    left:0;
+    right: 0;
+    top: 12%;
+    bottom: 0;
+    background: #DAFAE7;
+}
+
+
+/* Polygon 1 */
+.polygon1 {
+    position: absolute;
+    left: 0%;
+    bottom: 0;
+    display : inline-block;
+    width:0px;
+    height:0px;
+    border-color:transparent transparent #66E1AC;
+    border-style: solid;
+    border-width:0px 40vh 45vh 40vh;
+}
+
+
+/* Polygon 2 */
+.polygon2{
+    position: absolute;
+    right: 40%;
+    bottom: 0;
+    width:0px;
+    height:0px;
+    border-color:transparent transparent #99E5C2;
+    border-style: solid;
+    border-width:0px 30vh 40vh 30vh;
+}
+
+
+/* Polygon 3 */
+.polygon3{
+    position: absolute;
+    right: 35%;
+    bottom: 0;
+    width:0px;
+    height:0px;
+    border-color:transparent transparent #99E5C2;
+    border-style: solid;
+    border-width:0px 25vh 35vh 25vh;
+}
+
+
+/* Polygon 4 */
+.polygon4{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width:0px;
+    height:0px;
+    border-color:transparent transparent #259C72;
+    border-style: solid;
+    border-width:0px 40vh 50vh 40vh;
+}

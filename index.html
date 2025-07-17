@@ -8,70 +8,77 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="css/styles.css" />
+   <script src="jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <link rel="stylesheet" href="css/yearpicker.css">
+<script src="yearpicker.js"></script>
 </head>
 <body>
   <div class="container">
-    
     <header>
-    
-      <div class="title">
+        <div class="title">
         <h1>Fodos</h1>
         <h4>Mon blog photos & randos</h4>
-      </div>
-   </header>
-       <nav><img class="img-navbar" id="img-logo" src="assets/Design_plat_Appareil_photo_vert.svg.png" alt="logo" />
-       <img class="img-navbar" id="img-illustration" src="assets/4328351-removebg-preview.png" alt="illustration" />
-    </nav>
-
+      </div> 
+  </header>
+   <nav><img class="img-navbar" id="img-logo" src="assets/Design_plat_Appareil_photo_vert.svg.png" alt="logo" />
+      <img class="img-navbar" id="img-illustration" src="assets/4328351-removebg-preview.png" alt="illustration" />
+      </nav>
     <aside class="sidebar">
       <ul>
-        <li>
-          <a href="#massif" class="menu">
-            <h4 class="menu-title menu-location">Massif</h4>
+        <li class="menu">
+            <h4 class="menu-title menu-location">
+            <span class="icon"></span>
+            <span class="label" data-original="Massif">Massif</span>
+            </h4>
             <ul class="menu-dropdown">
               <li>Vercors</li>
               <li>Giffre</li>
               <li>Dévoluy</li>
             </ul>
-          </a>
         </li>
-        <li>
-          <a href="#date" class="menu">
-            <h4 class="menu-title menu-calendar">Date</h4>
-            <ul class="menu-dropdown"></ul>
-          </a>
-        </li>
-        <li>
-          <a href="#difficulte" class="menu">
-            <h4 class="menu-title menu-difficult">Difficulté</h4>
+        <li class="menu">
+            <h4 class="menu-title menu-difficult">
+            <span class="icon"></span>
+            <span class="label" data-original="Difficulté">Difficulté</span>
+            </h4>
             <ul class="menu-dropdown">
               <li>Facile</li>
               <li>Moyen</li>
               <li>Difficile</li>
             </ul>
-          </a>
         </li>
-        <li>
-          <a href="#interet" class="menu">
-            <h4 class="menu-title menu-heart">Intérêt</h4>
+        <li class="menu">
+            <h4 class="menu-title menu-heart">
+              <span class="icon"></span>
+              <span class="label" data-original="Intérêt">Intérêt</span>
+            </h4>
             <ul class="menu-dropdown">
               <li>Faible</li>
               <li>Moyen</li>
               <li>Fort</li>
             </ul>
-          </a>
+   
         </li>
-        <li>
-          <a href="#tags" class="menu">
-            <h4 class="menu-title menu-tag">Tags</h4>
+        <li class="menu">
+             <h4 class="menu-title menu-tag">
+              <span class="icon"></span>
+              <span class="label" data-original="Tag">Tag</span>
+            </h4>
             <ul class="menu-dropdown">
               <li>Lac</li>
               <li>Bouquetins</li>
               <li>Raquettes</li>
             </ul>
-          </a>
+ 
         </li>
-      </ul>
+       </ul>
+       <div class="end-menu"><div class="menu-reset">
+        <i id="reset-menu" class="fa-solid fa-arrow-rotate-left" title="reset"></i>
+      </div>
+       <div class="menu-confirm">
+    <a href="page.html" class="menu-confirm"><i id="confirm-menu"class="fa-solid fa-circle-check" title="confirm"></i></a>
+</div></div>
     </aside>
         <section class="gallery">
             <details name="paysages" >
@@ -110,8 +117,8 @@
         </section>
     <footer>Footer</footer>
   </div>
-
   <script src="script.js"></script>
+ 
 </body>
 </html>
 

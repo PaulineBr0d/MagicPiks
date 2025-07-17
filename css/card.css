@@ -1,0 +1,168 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    z-index: 10;
+    background-color: white; 
+}
+.head-icon{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: clamp(15px, 2vw, 35px);
+  color:#575454;
+}
+
+i:hover {
+  transform: scale(1.2);
+  color: #007f66;
+}
+.title > h4 {
+  margin-bottom: 20px;
+    }
+
+main {
+    position: relative;
+    z-index: 1;
+    height: 90vh;
+    background-image: url("../assets/fond-vert.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+   
+}
+
+  
+.menu-title {
+    display: block;
+    background-color: #575454;
+    color: #B4B3B3;
+    text-align: left;
+    font-weight: normal; 
+    width:175px;
+    }
+
+ .menu-title .icon::before {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        margin-right: 4px;
+        padding: 2px 4px;
+        background-color: #444;
+        color: #B4B3B3;
+        }
+
+        .menu-location .icon::before { content: "\f124"; }
+        .menu-difficult .icon::before { content: "\f201"; }
+        .menu-heart .icon::before { content: "\f08a"; }
+        .menu-tag .icon::before { content: "\f02b"; }   
+
+main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(240, 246, 237, 0.6); 
+  z-index: 0;
+}
+main > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+    display: flex;
+    background-color: #DFDFDF;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    gap: 60px;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-height: 400px;      
+    overflow-y: auto;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.img-card {
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.img-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Titre principal */
+.card h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    font-family: 'Montserrat', sans-serif;
+}
+.card > div:nth-child(2) {
+    display: flex;
+    align-items: center; 
+    margin-top: 20px;
+}
+
+span {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    }
+.description{
+   margin-top: 20px;
+}
+
+.card > div:last-child {
+    font-size: 1.4rem;
+    line-height: 1.4;
+    color: #444;
+
+}
+
+.card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+  .card{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; 
+    gap:15px;  
+  }
+
+.card h2 {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+.card > div:last-child {
+    font-size: 1rem;
+    padding:15px;
+}
+  .menu-title {
+    font-size: 0.9rem;
+  }
+}
