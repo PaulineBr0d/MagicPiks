@@ -1,25 +1,32 @@
 //Menu déroulant
-document.querySelectorAll('.menu').forEach(menu => {
-  const label = menu.querySelector('.menu-title .label');
-  const dropdown = menu.querySelector('.menu-dropdown');
- 
-  // Ouvrir/fermer au clic sur le titre
-  menu.querySelector('.menu-title').addEventListener('click', () => {
-    dropdown.classList.toggle('open');
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.menu').forEach(menu => {
+    const label = menu.querySelector('.menu-title .label');
+    const dropdown = menu.querySelector('.menu-dropdown');
+    const title = menu.querySelector('.menu-title');
 
-  // Mettre à jour le titre au clic sur une option
-  dropdown.querySelectorAll('li').forEach(item => {
-    item.addEventListener('click', () => {
-      label.textContent = item.textContent;
-      dropdown.classList.remove('open');
-    });
-  });
+    if (dropdown && title) {
+      // Ouvrir/fermer au clic sur le titre
+      title.addEventListener('click', () => {
+        dropdown.classList.toggle('open');
+      });
 
-  // Fermer le menu si on clique ailleurs
-  document.addEventListener('click', (e) => {
-    if (!menu.contains(e.target)) {
-      dropdown.classList.remove('open');
+      // Mettre à jour le titre au clic sur une option
+      dropdown.querySelectorAll('li').forEach(item => {
+        item.addEventListener('click', () => {
+          if (label) {
+            label.textContent = item.textContent;
+          }
+          dropdown.classList.remove('open');
+        });
+      });
+
+      // Fermer le menu si on clique ailleurs
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target)) {
+          dropdown.classList.remove('open');
+        }
+      });
     }
   });
 });
