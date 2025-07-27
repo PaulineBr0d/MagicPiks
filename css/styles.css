@@ -1,3 +1,5 @@
+@import url('responsive.css');
+
 *{
     margin: 0;
     padding: 0;
@@ -77,12 +79,12 @@ nav{
 .sidebar{ 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    margin-top: 50px;
+    /*justify-content: center;*/
     gap: 5px;
     grid-area: sidebar;
     letter-spacing: 2px;
-
+}
     li{
         list-style-type: none;
         padding : 10px;
@@ -91,6 +93,7 @@ nav{
 
     .menu {
         position: relative;
+        margin: 10px;
         }
 
     
@@ -104,7 +107,7 @@ nav{
         text-align: left;
         font-weight: normal;
         cursor: pointer; 
-        width: clamp(50px, 15vw, 250px);
+        width: clamp(50px, 30vw, 225px);
         }
 
     .menu-title:hover {
@@ -112,7 +115,7 @@ nav{
         transform: translateY(-2px);
         }    
     .menu-title .label {
-        font-size: clamp(10px, 1vw, 24px);
+        font-size: clamp(10px, 1.5vw, 24px);
         } 
 
     .menu-dropdown {
@@ -124,12 +127,15 @@ nav{
         min-width: 100%;
         background-color: #B4B3B3;  
         opacity: 0; 
+        max-height: 200px;      
+        overflow-y: auto; 
         transition: opacity 0.3s ease;
-        }
-    .menu-dropdown.open {
+                }
+   
+   .menu.open .menu-dropdown {
         display: block;
         opacity: 1;
-        }   
+    }
     .menu:hover > .menu-dropdown {
         opacity: 1;
         visibility: visible;
@@ -139,7 +145,7 @@ nav{
         display: block;
         line-height: 1.2;
         font-size: clamp(10px, 1vw, 24px);
-        padding: 5px 10px;
+        padding: px 10px;
         background: transparent;
         color: white;  
         white-space: nowrap;
@@ -149,7 +155,21 @@ nav{
             background-color 0.2s ease,
             color 0.2s ease;      
         }  
-     
+     .menu-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.menu-dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menu-dropdown::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
 
     .menu-dropdown > *:hover {
         background-color: #575454;
@@ -160,7 +180,7 @@ nav{
         font-size: clamp(10px, 1.5vw, 24px);
         font-family: "Font Awesome 6 Free";
         font-weight: 900;
-        /*margin-right: 8px;*/
+        margin-right: 8px;
         padding: 4px 4px;
         background-color: #444;
         color: #B4B3B3;
@@ -193,13 +213,13 @@ nav{
         justify-content: center;
         align-items: center;
         padding: 10px;
-        gap:20px;
+        gap:30px;
         font-size: clamp(10px, 2vw, 30px);
         color: #00B18A;
         cursor: pointer;
         transition: transform 0.3s ease, color 0.3s ease;
     }
-}    
+
 
 .gallery{
     grid-area: gallery;
@@ -208,6 +228,10 @@ nav{
     height: 100%;
 }  
 
+h2 a {
+  color: inherit; 
+  text-decoration: none;
+}
 details{
     display: flex;
     color: white;
@@ -215,11 +239,10 @@ details{
     position: relative;
     z-index: 1;
     flex-grow: 1;
-
     ::marker{
         content: ""
     }
-    summary{
+
         img{
             position: absolute;
             top: 0;
@@ -229,18 +252,19 @@ details{
             object-fit: cover;
             z-index:-1;
             transition: filter 0.5s ease;
+            filter: brightness(0.5);
         }
-    }
-
-    &[open]{
-        summary{
     
-            img{
-                filter: brightness(0.5);
+    
+}
+details {
+    &[open] {
+        width: 30%;
+        img{
+            filter: brightness(1);    
             }
         }
-    }
-        
+}
     .details-content{
         min-width: 200px;       
         background-color: rgba(0,0,0,0.6);
@@ -248,37 +272,10 @@ details{
         padding: 5px;
         opacity: 0.5; 
         font-style: italic;
+        
         }
 
-}
-
-
 footer{
-    background: #00B18A;
-    grid-area: footer;
-}
-
-@media screen and (max-width: 768px) {
-  .gallery {
-    flex-direction: column;
-  }
-  header{
-    .title > h1 {
-        font-size: 3rem;
-    }
-    .title > h4 {
-        font-size: 1rem;
-    }
-  }
-
-   .sidebar {
-        font-size: 16px;
-        gap: 3px;
-    }
-    .menu-dropdown {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-    }
+     grid-area: footer;
+    background-color: #00B18A;;
 }

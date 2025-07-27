@@ -1,40 +1,8 @@
-//Menu déroulant
+
+// Menu reset
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.menu').forEach(menu => {
-    const label = menu.querySelector('.menu-title .label');
-    const dropdown = menu.querySelector('.menu-dropdown');
-    const title = menu.querySelector('.menu-title');
 
-    if (dropdown && title) {
-      // Ouvrir/fermer au clic sur le titre
-      title.addEventListener('click', () => {
-        dropdown.classList.toggle('open');
-      });
-
-      // Mettre à jour le titre au clic sur une option
-      dropdown.querySelectorAll('li').forEach(item => {
-        item.addEventListener('click', () => {
-          if (label) {
-            label.textContent = item.textContent;
-          }
-          dropdown.classList.remove('open');
-        });
-      });
-
-      // Fermer le menu si on clique ailleurs
-      document.addEventListener('click', (e) => {
-        if (!menu.contains(e.target)) {
-          dropdown.classList.remove('open');
-        }
-      });
-    }
-  });
-});
-
-//Menu reset
-document.addEventListener('DOMContentLoaded', () => {
   const resetBtn = document.getElementById('reset-menu');
-
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
       document.querySelectorAll('.menu-title .label').forEach(label => {
@@ -45,32 +13,37 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-});
+})
 
-//Menu confirm à tester
+//Menu confirm
 document.addEventListener('DOMContentLoaded', () => {
-  const confirmBtn = document.getElementById('confirm-menu');
+const confirmBtn = document.getElementById('confirm-menu');
+if (confirmBtn) {
+  confirmBtn.addEventListener('click', (e) => {
+     e.preventDefault();
+    const selections = {};
+    const params = new URLSearchParams();
 
-  if (confirmBtn) {
-    confirmBtn.addEventListener('click', () => {
-      const selections = {};
+    document.querySelectorAll('.menu').forEach(menu => {
+      const label = menu.querySelector('.menu-title .label');
+      const original = label.getAttribute('data-original');
+      const current = label.textContent;
 
-      document.querySelectorAll('.menu').forEach(menu => {
-        const label = menu.querySelector('.menu-title .label');
-        if (label) {
-          const key = label.getAttribute('data-original');
-          const value = label.textContent;
-          if (key) {
-            selections[key] = value;
-          }
-        }
-      });
-
-      /*console.log('Choix confirmés :', selections);
-      alert('Choix validés :\n' + Object.entries(selections).map(([k, v]) => `${k} : ${v}`).join('\n'));*/
+      if (original && current && original !== current) {
+        selections[original] = current;
+      }
     });
-  } 
-});
+
+    if (selections["Massif"]) params.set("location", selections["Massif"]);
+    if (selections["Difficulté"]) params.set("difficulty", selections["Difficulté"]);
+    if (selections["Intérêt"]) params.set("interest", selections["Intérêt"]);
+    if (selections["Tag"]) params.set("tag", selections["Tag"]);
+
+    window.location.href = `listing.html?${params.toString()}`;
+     });
+  }
+})
+
 
 //Boutons header à activer
 document.addEventListener('DOMContentLoaded', () => {

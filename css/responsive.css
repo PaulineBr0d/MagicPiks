@@ -1,0 +1,23 @@
+@media screen and (max-width: 768px) {
+  .gallery{
+     display: block;
+     flex-direction: column;
+}  
+ 
+details {
+    pointer-events: none;
+    user-select: none;
+  }
+
+ 
+details {
+    &[open] {
+        display: none;
+         }}
+details:not([open]) {
+    img{
+        filter: brightness(1);    
+        }}
+
+
+}
