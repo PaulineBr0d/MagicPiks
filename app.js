@@ -71,6 +71,7 @@ function loadListingFiltered(data) {
   const int = params.get('interest');
   const tag = params.get('tag');
 
+  
   let filtered = [...data].reverse();
   if (loc) filtered = filtered.filter(r => r.location === loc);
   if (diff) filtered = filtered.filter(r => r.difficulty === diff);
@@ -109,11 +110,16 @@ function loadListingFiltered(data) {
 
 // PAGE DETAIL : Affiche les infos d’une rando par ID
 function loadDetail(data) {
+
   const main = document.querySelector('main');
   main.innerHTML = '';
   const id = new URLSearchParams(window.location.search).get('id');
   const rando = data.find(item => item.id == id);
   if (!rando) return;
+    const rawDate = new Date(rando.date);
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = rawDate.toLocaleDateString('fr-FR', options);
+
     const detail = document.createElement('div');
     detail.className = 'detail';
     detail.innerHTML = `
@@ -121,7 +127,10 @@ function loadDetail(data) {
         <div class="main-info">
         <div class="sub-title">
         <h2>${rando.title}</h2>
-        <a href="${rando.url}"><i class="fa-solid fa-link"></i></a></div>
+        <a href="${rando.url}"><i class="fa-solid fa-link"></i></a>
+        <div class="date">
+        <p><i class="fa-regular fa-calendar-days"></i> ${formattedDate}</p>
+        </div></div>
         <div class="text">
           <p>${rando.description}</p></div>
        </div>  

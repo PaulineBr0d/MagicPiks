@@ -40,6 +40,17 @@ a:hover {
     color: #007f66;
 }
 
+.date {
+font-size: clamp(1.2rem, 1.2vw, 2rem);
+  color: #555;
+  margin-top: 8px;
+}
+
+
+.date i {
+  margin-right: 6px;
+  color: #007f66;
+}
 
 .text{
     margin-top: 40px;
