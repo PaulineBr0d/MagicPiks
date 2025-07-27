@@ -64,10 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 //Boutons slider
-function initSlider() {
+function initSlider(imageCount) {
   const slides = document.querySelector(".inner");
-  const images = document.querySelectorAll(".img-detail");
-  const total = images.length;
+  const total = imageCount;
  
   let currentIndex = 0;
 

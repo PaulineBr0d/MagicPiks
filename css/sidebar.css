@@ -98,7 +98,7 @@ li{
     background-color: #575454;
 }
 
-   
+  
 .menu-title .icon::before {
     font-size: clamp(10px, 1.5vw, 24px);
     font-family: "Font Awesome 6 Free";

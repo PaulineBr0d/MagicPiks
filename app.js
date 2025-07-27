@@ -1,9 +1,6 @@
-let tabData = [];
-
 fetch('http://localhost:3000/')
   .then(res => res.json())
   .then(data => {
-    tabData = data;
     const page = document.body.getAttribute('data-page');
     if (page === 'index') {
       loadIndex(data);
@@ -120,6 +117,15 @@ function loadDetail(data) {
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const formattedDate = rawDate.toLocaleDateString('fr-FR', options);
 
+   const imagesHTML = rando.images
+  .map(num => `<div class="img-detail"><img src="images/${rando.id}_${num}.webp" alt="photo${num}"></div>`)
+  .join('');
+
+  if (rando.url) {
+    linkHTML = `<a href="${rando.url}" target="_blank"><i class="fa-solid fa-link"></i></a>`;
+    } else {
+    linkHTML = `<i class="fa-solid fa-link-slash"></i>`;
+  }
     const detail = document.createElement('div');
     detail.className = 'detail';
     detail.innerHTML = `
@@ -127,7 +133,7 @@ function loadDetail(data) {
         <div class="main-info">
         <div class="sub-title">
         <h2>${rando.title}</h2>
-        <a href="${rando.url}"><i class="fa-solid fa-link"></i></a>
+        ${linkHTML}
         <div class="date">
         <p><i class="fa-regular fa-calendar-days"></i> ${formattedDate}</p>
         </div></div>
@@ -141,26 +147,25 @@ function loadDetail(data) {
           <h4 class="menu-card menu-tag"><span class="icon"> ${rando.tags.join(', ')}</span></h4>
         </div>
             </div> 
-      <div class="center">
-      <div class="wrapper">
-      <div class="inner">
-      <div class="img-detail"><img src="images/${rando.id}_1.webp" alt="photo1"></div>
-        <div class="img-detail"><img src="images/${rando.id}_2.webp" alt="photo2"></div>
-        <div class="img-detail"><img src="images/${rando.id}_3.webp" alt="photo3"></div>
-        <div class="img-detail"><img src="images/${rando.id}_4.webp" alt="photo4"></div>
-        </div> 
-        </div> 
-        </div>
-         <div class="map">
+            <div class="map">
             <button id="first"></button>
             <button id="next"></button>
             <button id="last"></button>
             </div>
-        `;
+      <div class="center">
+      <div class="wrapper">
+      <div class="inner">
+      ${imagesHTML}
+        </div> 
+        </div> 
+        </div>
+                 `;
     main.appendChild(detail);
-    initSlider();
+    const imageCount = detail.querySelectorAll('.img-detail').length;
+    initSlider(imageCount);
    
 }
+
 
 
 // FILTRES : Redirection au clic selon ton menu HTML
