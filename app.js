@@ -27,7 +27,12 @@ const { locations, difficulties, interests, tags } = extractCategories(data);
       loadDetail(data);
     }
   })
-  .catch(err => console.error('Erreur API', err));
+  .catch(err => {console.error('Erreur API', err);
+      const index = document.querySelector('.gallery');
+      const error = document.createElement('div');
+      error.innerHTML = `<div class="error">Problème avec les données 😕</div>`;
+      index.appendChild(error);}
+);
 
 function extractCategories(data) {
   const locations = [...new Set(data.map(r => r.location))];
@@ -47,7 +52,7 @@ function loadIndex(data) {
     const bloc = document.createElement('div');
     bloc.innerHTML = `
   <details ${isSecond ? 'open' : ''} name="paysages">
-    <summary><img src="images/${rando.id}.webp" alt="${rando.title}"></summary>
+    <summary><img src="images/${rando.id}_1.webp" alt="${rando.title}"></summary>
     <div class="details-content">
       <h2><a href="detail.html?id=${rando.id}">${rando.title}</a></h2>
     </div>
@@ -72,11 +77,11 @@ function loadListingFiltered(data) {
   if (int) filtered = filtered.filter(r => r.interest === int);
   if (tag) filtered = filtered.filter(r => r.tags.includes(tag));
 
-  const main = document.querySelector('main');
-  main.innerHTML = '';
+  const containerFilter = document.querySelector('.container-filter');
+ containerFilter.innerHTML = '';
 
   if (filtered.length === 0) {
-    main.innerHTML = '<p>Aucune randonnée trouvée 😕</p>';
+    containerFilter.innerHTML = '<p>Aucune randonnée trouvée 😕</p>';
     return;
   }
 
@@ -84,18 +89,20 @@ function loadListingFiltered(data) {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-      <div class="img-card"><img src="images/${rando.id}.webp" alt="${rando.title}"></div>
-      <div><a href="detail.html?id=${rando.id}"<h2>${rando.title}</h2></a></div>
+      <div class="img-card"><img src="images/${rando.id}_1.webp" alt="${rando.title}"></div>
+      <div class="card-content">
+      <div class="card-title"><a href="detail.html?id=${rando.id}"><h2>${rando.title}</h2></a></div>
       <div class="description">
+        <p>${rando.description}</p>
+        </div>
         <span class="wrap-menu">
-          <h4 class="menu-title menu-location"><span class="icon">${rando.location}</h4>
-          <h4 class="menu-title menu-difficult"><span class="icon">${rando.difficulty}</h4>
-          <h4 class="menu-title menu-heart"><span class="icon">${rando.interest}</h4>
-          <h4 class="menu-title menu-tag"><span class="icon"> ${rando.tags[0]}</h4>
+          <h4 class="menu-card menu-location"><span class="icon">${rando.location}</h4>
+          <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</h4>
+          <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</h4>
+          <h4 class="menu-card menu-tag"><span class="icon"> ${rando.tags[0]}</h4>
         </span>
-        <div>${rando.description}</div>
       </div>`;
-    main.appendChild(card);
+    containerFilter.appendChild(card);
   });
 }
 
@@ -111,26 +118,27 @@ function loadDetail(data) {
     detail.className = 'detail';
     detail.innerHTML = `
     <div class="content">
+        <div class="main-info">
         <div class="sub-title">
         <h2>${rando.title}</h2>
-        <a href="${rando.url}"><i class="fa-solid fa-link"></i></a> </div>
-        <div class=text>
-          <p>${rando.description}</p>
-          <div class="menu">
-          <h4 class="menu-title menu-location"><span class="icon">${rando.location}</span></h4>
-          <h4 class="menu-title menu-difficult"><span class="icon">${rando.difficulty}</span></h4>
-          <h4 class="menu-title menu-heart"><span class="icon">${rando.interest}</span></h4>
-          <h4 class="menu-title menu-tag"><span class="icon"> ${rando.tags.join(', ')}</span></h4>
-         </div>    
-            </div>
+        <a href="${rando.url}"><i class="fa-solid fa-link"></i></a></div>
+        <div class="text">
+          <p>${rando.description}</p></div>
+       </div>  
+          <div class="detail-menu">
+          <h4 class="menu-card menu-location"><span class="icon">${rando.location}</span></h4>
+          <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</span></h4>
+          <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</span></h4>
+          <h4 class="menu-card menu-tag"><span class="icon"> ${rando.tags.join(', ')}</span></h4>
+        </div>
             </div> 
       <div class="center">
       <div class="wrapper">
       <div class="inner">
-      <div class="card"><img src="images/${rando.id}.webp" alt="photo1"></div>
-        <div class="card"><img src="images/${rando.id}.webp" alt="photo2"></div>
-        <div class="card"><img src="images/${rando.id}.webp" alt="photo3"></div>
-        <div class="card"><img src="images/${rando.id}.webp" alt="photo4"></div>
+      <div class="img-detail"><img src="images/${rando.id}_1.webp" alt="photo1"></div>
+        <div class="img-detail"><img src="images/${rando.id}_2.webp" alt="photo2"></div>
+        <div class="img-detail"><img src="images/${rando.id}_3.webp" alt="photo3"></div>
+        <div class="img-detail"><img src="images/${rando.id}_4.webp" alt="photo4"></div>
         </div> 
         </div> 
         </div>
@@ -141,6 +149,8 @@ function loadDetail(data) {
             </div>
         `;
     main.appendChild(detail);
+    initSlider();
+   
 }
 
 

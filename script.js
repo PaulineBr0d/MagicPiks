@@ -45,7 +45,7 @@ if (confirmBtn) {
 })
 
 
-//Boutons header à activer
+//Boutons header
 document.addEventListener('DOMContentLoaded', () => {
   const homeBtn = document.getElementById('home');
   const backBtn = document.getElementById('back');
@@ -64,16 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 //Boutons slider
-document.addEventListener("DOMContentLoaded", () => {
+function initSlider() {
   const slides = document.querySelector(".inner");
-  const cards = document.querySelectorAll(".card");
-  const total = cards.length;
-
+  const images = document.querySelectorAll(".img-detail");
+  const total = images.length;
+ 
   let currentIndex = 0;
 
   const firstBtn = document.getElementById("first");
   const nextBtn = document.getElementById("next");
   const lastBtn = document.getElementById("last");
+
+ 
 
   if (slides && total > 0) {
     if (firstBtn) {
@@ -94,7 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
       lastBtn.addEventListener("click", () => {
         currentIndex = total - 1;
         slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+  
       });
     }
-  } 
-});
+  }
+}
