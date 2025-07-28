@@ -97,7 +97,7 @@ function loadListingFiltered(data) {
           <h4 class="menu-card menu-location"><span class="icon">${rando.location}</h4>
           <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</h4>
           <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</h4>
-          <h4 class="menu-card menu-tag"><span class="icon"> ${rando.tags[0]}</h4>
+          <h4 class="menu-card menu-tag tag-card"><span class="icon"> ${rando.tags[0]}</h4>
         </span>
       </div>`;
     containerFilter.appendChild(card);
@@ -144,7 +144,7 @@ function loadDetail(data) {
           <h4 class="menu-card menu-location"><span class="icon">${rando.location}</span></h4>
           <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</span></h4>
           <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</span></h4>
-          <h4 class="menu-card menu-tag"><span class="icon"> ${rando.tags.join(', ')}</span></h4>
+          <h4 class="menu-card menu-tag tag-card"><span class="icon"> ${rando.tags.join(', ')}</span></h4>
         </div>
             </div> 
             <div class="map">

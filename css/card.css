@@ -86,8 +86,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    align-items: flex-end;
-
 }
 .menu-card {
     display: block;
@@ -96,9 +94,9 @@
     font-size: clamp(0.8rem, 1.2vw, 1.8rem);
     background-color: #575454;
     color: #B4B3B3;
-    text-align: left;
     font-weight: normal;
-    width: clamp(115px, 14vw, 250px);   
+    width: clamp(125px, 14vw, 250px);  
+  
 }
 
 
