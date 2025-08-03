@@ -1,4 +1,4 @@
-fetch('http://localhost:3000/')
+fetch('http://localhost:3000/api/data') 
   .then(res => res.json())
   .then(data => {
     const page = document.body.getAttribute('data-page');
@@ -21,7 +21,7 @@ const { locations, difficulties, interests, tags } = extractCategories(data);
       loadListingFiltered(data);
     }
     if (page === 'detail') {
-      loadDetail(data);
+      loadDetail();
     }
   })
   .catch(err => {console.error('Erreur API', err);
@@ -49,12 +49,12 @@ function loadIndex(data) {
     const bloc = document.createElement('div');
     bloc.innerHTML = `
   <details ${isSecond ? 'open' : ''} name="paysages">
-    <summary><img src="images/${rando.id}_1.webp" alt="${rando.title}"></summary>
+    <summary><img src="images/${rando._id}_1.webp" alt="${rando.title}"></summary>
     <div class="details-content">
-      <h2><a href="detail.html?id=${rando.id}">${rando.title}</a></h2>
+      <h2><a href="detail.html?id=${rando._id}">${rando.title}</a></h2>
     </div>
-  </details>
-`;
+  </details>`
+;
 
 gallery.appendChild(bloc.firstElementChild);
   });
@@ -87,9 +87,9 @@ function loadListingFiltered(data) {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-      <div class="img-card"><img src="images/${rando.id}_1.webp" alt="${rando.title}"></div>
+      <div class="img-card"><img src="images/${rando._id}_1.webp" alt="${rando.title}"></div>
       <div class="card-content">
-      <div class="card-title"><a href="detail.html?id=${rando.id}"><h2>${rando.title}</h2></a></div>
+      <div class="card-title"><a href="detail.html?id=${rando._id}"><h2>${rando.title}</h2></a></div>
       <div class="description">
         <p>${rando.description}</p>
         </div>
@@ -106,67 +106,75 @@ function loadListingFiltered(data) {
 
 
 // PAGE DETAIL : Affiche les infos d’une rando par ID
-function loadDetail(data) {
-
+function loadDetail() {
   const main = document.querySelector('main');
   main.innerHTML = '';
   const id = new URLSearchParams(window.location.search).get('id');
-  const rando = data.find(item => item.id == id);
-  if (!rando) return;
-    const rawDate = new Date(rando.date);
-    const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    const formattedDate = rawDate.toLocaleDateString('fr-FR', options);
 
-   const imagesHTML = rando.images
-  .map(num => `<div class="img-detail"><img src="images/${rando.id}_${num}.webp" alt="photo${num}"></div>`)
-  .join('');
+  fetch(`http://localhost:3000/api/data/${id}`) 
+    .then(res => {
+      if (!res.ok) throw new Error('Rando introuvable');
+      return res.json();
+    })
+    .then(rando => {
+      const rawDate = new Date(rando.date);
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      const formattedDate = rawDate.toLocaleDateString('fr-FR', options);
 
-  if (rando.url) {
-    linkHTML = `<a href="${rando.url}" target="_blank"><i class="fa-solid fa-link"></i></a>`;
-    } else {
-    linkHTML = `<i class="fa-solid fa-link-slash"></i>`;
-  }
-    const detail = document.createElement('div');
-    detail.className = 'detail';
-    detail.innerHTML = `
-    <div class="content">
-        <div class="main-info">
-        <div class="sub-title">
-        <h2>${rando.title}</h2>
-        ${linkHTML}
-        <div class="date">
-        <p><i class="fa-regular fa-calendar-days"></i> ${formattedDate}</p>
-        </div></div>
-        <div class="text">
-          <p>${rando.description}</p></div>
-       </div>  
-          <div class="detail-menu">
-          <h4 class="menu-card menu-location"><span class="icon">${rando.location}</span></h4>
-          <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</span></h4>
-          <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</span></h4>
-          <h4 class="menu-card menu-tag tag-card"><span class="icon"> ${rando.tags.join(', ')}</span></h4>
-        </div>
-            </div> 
-            <div class="map">
-            <button id="first"></button>
-            <button id="next"></button>
-            <button id="last"></button>
+      const imagesHTML = rando.images
+        .map(num => `<div class="img-detail"><img src="images/${rando._id}_${num}.webp" alt="photo${num}"></div>`)
+        .join('');
+
+      const linkHTML = rando.url
+        ? `<a href="${rando.url}" target="_blank"><i class="fa-solid fa-link"></i></a>`
+        : `<i class="fa-solid fa-link-slash"></i>`;
+
+      const detail = document.createElement('div');
+      detail.className = 'detail';
+      detail.innerHTML = `
+        <div class="content">
+          <div class="main-info">
+            <div class="sub-title">
+              <h2>${rando.title}</h2>
+              ${linkHTML}
+              <div class="date">
+                <p><i class="fa-regular fa-calendar-days"></i> ${formattedDate}</p>
+              </div>
             </div>
-      <div class="center">
-      <div class="wrapper">
-      <div class="inner">
-      ${imagesHTML}
+            <div class="text">
+              <p>${rando.description}</p>
+            </div>
+          </div>  
+          <div class="detail-menu">
+            <h4 class="menu-card menu-location"><span class="icon">${rando.location}</span></h4>
+            <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</span></h4>
+            <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</span></h4>
+            <h4 class="menu-card menu-tag tag-card"><span class="icon">${rando.tags.join(', ')}</span></h4>
+          </div>
         </div> 
-        </div> 
+        <div class="map">
+          <button id="first"></button>
+          <button id="next"></button>
+          <button id="last"></button>
         </div>
-                 `;
-    main.appendChild(detail);
-    const imageCount = detail.querySelectorAll('.img-detail').length;
-    initSlider(imageCount);
-   
+        <div class="center">
+          <div class="wrapper">
+            <div class="inner">
+              ${imagesHTML}
+            </div> 
+          </div> 
+        </div>
+      `;
+
+      main.appendChild(detail);
+      const imageCount = detail.querySelectorAll('.img-detail').length;
+      initSlider(imageCount);
+    })
+    .catch(err => {
+      main.innerHTML = `<p class="error">Erreur lors du chargement de la randonnée 😕</p>`;
+      console.error(err);
+    });
 }
-
-
 
 // FILTRES : Redirection au clic selon ton menu HTML
 function initFilters() {
@@ -269,4 +277,3 @@ function initMenuListeners() {
     });
   });
 }
-

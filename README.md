@@ -1,151 +1,103 @@
-# project_fodos
+# Projet Randos - API & Site Web
+
+## Description
+
+Ce projet est une application web affichant des randonnées avec un backend API Node.js + MongoDB et un frontend JavaScript.  
+Les données sont stockées dans MongoDB et l’API permet de récupérer les infos.  
+Le site affiche les listes, détails, et filtres des randos. Design :
 https://www.figma.com/design/GC5v95K5CKXshqJNZi0CTG/projet_formation?node-id=3-1682&t=Nt0IzPanDyLM6y2a-0
 
+---
 
-créer une api locale pour structurer les données à récupérer => ci-dessous données pour test
-let randos = [
-  {
-    id: "300723",
-    title: "Lac de Loie",
-    date: "2023-07-30",
-    location: "Val d'Aoste",
-    difficulty: "Moyen",
-    interest: "Fort",
-    tags: ["Lac"],
-    description: "Pause au lac assez fréquenté, vallon très beau",
-    url: "https://www.altituderando.com/Lac-de-Loie-2354m-en-boucle-par-Lillaz-et-le-vallon-de-Bardoney",
-    images: ["1", "2", "3", "4"]
-  },
-  {
-    id: "310723",
-    title: "Pointe de Metz",
-    date: "2023-07-31",
-    location: "Val d'Aoste",
-    difficulty: "Moyen",
-    interest: "Moyen",
-    tags: ["Lac"],
-    description: "Rando sympa. Petite section hors sentier",
-    url: "https://www.altituderando.com/Pointe-de-Metz-2552m-Pointe-de-Chaligne-2607m-et-Lago-Fallere-en-boucle-par",
-    images: ["1", "2"]
-  },
-  {
-    id: "10823",
-    title: "Boucle Grand Collet",
-    date: "2023-08-01",
-    location: "Val d'Aoste",
-    difficulty: "Moyen",
-    interest: "Fort",
-    tags: ["Chamois", "Bouquetin", "Gran Paradiso"],
-    description: "Très belle rando pas très fréquenté, belle vue sur Grand Paradiso.",
-    url: "https://www.komoot.com/fr-fr/smarttour/709796",
-    images: ["1", "2", "3", "4", "5"]
-  },
-  {
-    id: "20823",
-    title: "Lago Goletta",
-    date: "2023-08-02",
-    location: "Val d'Aoste",
-    difficulty: "Difficile",
-    interest: "Fort",
-    tags: ["Lac", "Refuge", "Cascade"],
-    description: "Belle randonnée. Monté au lac, vue sur le glacier (mais vent glacial) Nous avons mangé au refuge puis fait une boucle sur le chemin 13C",
-    url: "https://fr.wikiloc.com/itineraires-randonnee/rifugio-benevolo-lago-goletta-colle-goletta-via-thumel-altavia-80203405",
-    images: ["1", "2", "3", "4"]
-  },
-  {
-    id: "30823",
-    title: "Refuge Bezzi et bonus",
-    date: "2023-08-03",
-    location: "Val d'Aoste",
-    difficulty: "Difficile",
-    interest: "Moyen",
-    tags: ["Lac", "Refuge"],
-    description: "Après avoir atteint le refuge, nous sommes monté au lac St MArtin pour manger. Puis nous avons fait le retour par le balcon : très long...",
-    url: "",
-    images: ["1", "2", "3", "4"]
-  },
-  {
-    id: "60823",
-    title: "Bivouac Gérard-Grappein",
-    date: "2023-08-06",
-    location: "Val d'Aoste",
-    difficulty: "Difficile",
-    interest: "Fort",
-    tags: ["Chamois", "Bouquetin", "Glacier"],
-    description: "Jamis autant vu de bouquetins, par contre presque pas croiser d'humains !",
-    url: "",
-    images: ["1", "2", "3", "4"]
-  },
-  {
-    id: "80823",
-    title: "Refuge Vittorio Sella",
-    date: "2023-08-08",
-    location: "Val d'Aoste",
-    difficulty: "Moyen",
-    interest: "Moyen",
-    tags: ["Refuge"],
-    description: "Assez fréquenté",
-    url: "https://www.visorando.com/randonnee-aller-retour-au-refuge-vittorio-sella-de/",
-    images: ["1", "2", "3"]
-  },
-  {
-    id: "90823",
-    title: "Laghi di Lussert et Mont des Laures",
-    date: "2023-08-09",
-    location: "Val d'Aoste",
-    difficulty: "Difficile",
-    interest: "Moyen",
-    tags: ["Lac"],
-    description: "Rando sympa",
-    url: "https://www.altituderando.com/Laghi-di-Lussert-et-Mont-des-Laures-3121m",
-    images: ["1", "2", "3"]
-  },
-  {
-    id: "290625",
-    title: "Le pas de l'Oeille",
-    date: "2025-06-29",
-    location: "Vercors",
-    difficulty: "Moyen",
-    interest: "Moyen",
-    tags: ["Pierrier", "Lapiaz", "Bouquetin"],
-    description: "Rando faite pour échapper à la météo caniculaire à Lyon. Pas d'ombre après le vallon de Fauge. Descente par les pistes, peu d'intérêt. Break au resto du téléphérique (ouveert) et sieste au lac des Prés. Pas vu de bouquetins.",
-    url: "https://www.visorando.com/randonnee-pas-de-l-oeille-par-le-vallon-de-la-faug/",
-    images: ["1", "2", "3", "4"]
-  },
-  {
-    id: "90625",
-    title: "Les chalets de Sales",
-    date: "2025-06-09",
-    location: "Giffre",
-    difficulty: "Moyen",
-    interest: "Fort",
-    tags: ["Bouquetin", "Cirque", "Refuge"],
-    description: "Très fréquentée mais cirque magnifique. Grande harde de bouquetins, peu farouches. Le refuge n'ouvrait que le week-end suivant. A prolonger si plus de temps.",
-    url: "https://www.visorando.com/randonnee-les-chalets-de-sales-depuis-le-lignon/",
-    images: ["1", "2", "3", "4", "5"]
-  },
-  {
-    id: "80625",
-    title: "Lac des verdets",
-    date: "2025-06-08",
-    location: "Giffre",
-    difficulty: "Moyen",
-    interest: "Faible",
-    tags: ["Refuge"],
-    description: "Montée sur piste facile mais rando stoppée car le brouillard ne s'est pas levé.",
-    url: "https://www.visorando.com/randonnee-lac-des-verdets/",
-    images: ["1"]
-  },
-  {
-    id: "70625",
-    title: "Le bout du monde",
-    date: "2025-06-07",
-    location: "Giffre",
-    difficulty: "Facile",
-    interest: "Fort",
-    tags: ["Torrent", "Cirque", "Cascade"],
-    description: "Parking non payant à partir de 15h30. Faite par mauvais temps donc peu frequentée mais très populaire. Vu la météo humide, rando stoppée. Plusieurs torrents à traverser difficilement mais cascades magnifiques.",
-    url: "https://www.visorando.com/randonnee-le-bout-du-monde-3/",
-    images: ["1", "2", "3", "4"]
-  }
-];
+## Fonctionnalités réalisées
+
+- Backend Node.js avec Express et MongoDB  
+- Seed de la base avec des données initiales  
+- Routes API CRUD (lecture) pour récupérer les randonnées  
+- Frontend JS dynamique pour :  
+  - Page index (4 dernières randos)  
+  - Page listing filtrée (par lieu, difficulté, intérêt, tag)  
+  - Page détail avec affichage complet  
+- Menus dynamiques basés sur les données  
+- Slider d’images sur la page détail  
+
+---
+
+## Prérequis
+
+- Node.js (version 16+ recommandée)  
+- MongoDB local ou service cloud (ex : MongoDB Atlas)  
+- Compte Heroku (pour déploiement)
+
+---
+
+## Installation locale
+
+1. Cloner le projet  
+git clone <URL_DU_PROJET>
+cd <nom_du_projet>
+2. Installer les dépendances  
+npm install
+3. Configurer les variables d’environnement  
+- Créer un fichier `.env` à la racine  
+- Ajouter la variable MongoDB (exemple) :  
+  ```
+  MONGODB_URI=mongodb+srv://<user>:<password>@cluster0.mongodb.net/data?retryWrites=true&w=majority
+  ```
+4. Lancer le seed (si nécessaire)  
+node src/seed.js
+5. Lancer le serveur localement  
+npm start
+6. Ouvrir dans le navigateur  
+http://localhost:3000
+
+---
+
+## Déploiement sur Heroku
+
+### Étapes
+
+1. Créer un compte Heroku et installer la CLI  
+npm install -g heroku
+heroku login
+2. Depuis le dossier du projet, créer une app Heroku  
+heroku create mon-app-randos
+3. Ajouter la variable d’environnement MongoDB dans Heroku  
+heroku config:set MONGODB_URI="mongodb+srv://<user>:<password>@cluster0.mongodb.net/randos?retryWrites=true&w=majority"
+4. Préparer le projet :  
+- Vérifier présence du fichier `Procfile` avec :  
+  ```
+  web: node index.js
+  ```  
+- Vérifier que dans `index.js` le serveur écoute bien sur `process.env.PORT || 3000`
+
+5.  Initialiser git si besoin, puis pousser sur Heroku 
+git init 
+git add .
+git commit -m "Deploy to Heroku"
+git push heroku main
+6. Ouvrir l’app Heroku dans le navigateur  
+heroku open
+
+---
+
+## À venir / recommandations
+
+- Héberger les images sur un service spécialisé (ex: Cloudinary)  
+- Modifier la base pour stocker les URLs d’images externes  
+- Mettre en place un CDN pour les assets statiques  
+- Ajouter des tests automatisés  
+- Ajouter une gestion des erreurs plus fine côté frontend  
+- Ajouter un système d’authentification si besoin
+
+---
+
+## Ressources utiles
+
+- [Heroku Node.js Deployment](https://devcenter.heroku.com/articles/getting-started-with-nodejs)  
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)  
+- [Cloudinary](https://cloudinary.com/documentation)  
+- [Express.js Documentation](https://expressjs.com/)
+
+---
+

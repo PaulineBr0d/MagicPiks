@@ -69,12 +69,14 @@ details:not([open]) {
     align-self: flex-start;
   }
   
-.sub-title {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap:8px;
-}
-
+  .sub-title {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap:8px;
+  }
+  footer{
+    font-size:10px
+  }
 
 }
