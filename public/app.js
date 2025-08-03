@@ -49,7 +49,7 @@ function loadIndex(data) {
     const bloc = document.createElement('div');
     bloc.innerHTML = `
   <details ${isSecond ? 'open' : ''} name="paysages">
-    <summary><img src="images/${rando._id}_1.webp" alt="${rando.title}"></summary>
+    <summary><img src="${rando.images[0]?.url}" alt="${rando.title}"></summary>
     <div class="details-content">
       <h2><a href="detail.html?id=${rando._id}">${rando.title}</a></h2>
     </div>
@@ -87,7 +87,7 @@ function loadListingFiltered(data) {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-      <div class="img-card"><img src="images/${rando._id}_1.webp" alt="${rando.title}"></div>
+      <div class="img-card">   <img src="${rando.images[0]?.url || 'fallback.jpg'}" alt="${rando.title}"></div>
       <div class="card-content">
       <div class="card-title"><a href="detail.html?id=${rando._id}"><h2>${rando.title}</h2></a></div>
       <div class="description">
@@ -121,10 +121,12 @@ function loadDetail() {
       const options = { day: 'numeric', month: 'long', year: 'numeric' };
       const formattedDate = rawDate.toLocaleDateString('fr-FR', options);
 
-      const imagesHTML = rando.images
+      /*const imagesHTML = rando.images
         .map(num => `<div class="img-detail"><img src="images/${rando._id}_${num}.webp" alt="photo${num}"></div>`)
-        .join('');
-
+        .join('');*/
+      const imagesHTML = rando.images
+      .map(img => `<div class="img-detail"><img src="${img.url}" alt="${img.public_id}"></div>`)
+      .join('');
       const linkHTML = rando.url
         ? `<a href="${rando.url}" target="_blank"><i class="fa-solid fa-link"></i></a>`
         : `<i class="fa-solid fa-link-slash"></i>`;

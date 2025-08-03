@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const dataSchema = new mongoose.Schema({
+    _id: {
+    type: String, // ID = slug
+    required: true
+  },
   title: { type: String, required: true },
   date: { type: Date, required: true },
   location: { type: String, required: true },
@@ -9,7 +13,12 @@ const dataSchema = new mongoose.Schema({
   tags: { type: [String], required: true },
   description: { type: String, required: true },
   url: { type: String }, // facultatif
-  images: [String] // facultatif
+  images:  [
+  {
+    url: { type: String, required: true },
+    public_id: { type: String, required: true }
+  }
+]
 });
 
 module.exports = mongoose.models.Data || mongoose.model('Data', dataSchema);

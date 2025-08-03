@@ -84,8 +84,7 @@ heroku open
 ## À venir / recommandations
 
 - Héberger les images sur un service spécialisé (ex: Cloudinary)  
-- Modifier la base pour stocker les URLs d’images externes  
-- Mettre en place un CDN pour les assets statiques  
+- Modifier la base pour stocker les URLs d’images externes    
 - Ajouter des tests automatisés  
 - Ajouter une gestion des erreurs plus fine côté frontend  
 - Ajouter un système d’authentification si besoin
