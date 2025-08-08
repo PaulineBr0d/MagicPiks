@@ -102,3 +102,19 @@ function initSlider(imageCount) {
     }
   }
 }
+
+//Bouton Add
+document.addEventListener('DOMContentLoaded', () => {
+const addBtn = document.getElementById('add-menu');
+if (addBtn) {
+/*/if (user && user.role === 'admin') {
+  addBtn.style.display = 'inline-block';*/
+  addBtn.addEventListener('click', e => {
+   
+    e.preventDefault();
+    window.location.href = 'add.html';
+ });
+ /*} else {
+  addBtn.style.display = 'none';
+}*/
+}})

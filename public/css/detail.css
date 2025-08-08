@@ -1,9 +1,32 @@
 .detail {
    display: flex;
-    flex-direction: column;   
-    max-height: 100%;
-    overflow-y: auto;
+   justify-content: center;
+
+    /*align-items: center;
+   flex-direction: column;  
+    max-height: 100%; */
+    width:100%;
+    flex-wrap: wrap;
+      overflow-y: auto;
+    max-height: 700px;
 }
+
+.left-card {
+  flex: 1 1 500px;
+  background-color: #DFDFDF;
+   border-radius: 8px;
+    padding: 40px;
+    width: 100%;
+    max-height: 500px;
+
+}
+
+.right-content {
+  flex: 2 1 500px;
+  padding: 2rem;
+  
+}
+
 .detail::-webkit-scrollbar {
     width: 8px;
 }
@@ -20,16 +43,16 @@
 }
 .content {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: flex-start;
-    background-color: #DFDFDF;
-    padding: 40px;
-    width: 100%;
-    border-radius: 8px;
+   
+    gap:10px;
+   
     flex-wrap: wrap
  }
-.main-info {
-    flex: 3;
+.main-info{
+    display: flex;
+    gap:10px;
 }
 
 .sub-title{
@@ -38,12 +61,12 @@
 }
 
 .sub-title h2{
-    font-size: clamp(1.2rem, 1.8vw, 2.5rem);
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
     margin: 0;  
 }
 
 .sub-title i{
-    font-size: clamp(15px, 2vw, 35px);
+    font-size: clamp(15px, 2vw, 30px);
     color:#575454; 
 }
 
@@ -52,21 +75,9 @@ a:hover {
     color: #007f66;
 }
 
-.date {
-font-size: clamp(1.2rem, 1.2vw, 2rem);
-  color: #555;
-  margin-top: 4px;
-}
-
-
-.date i {
-  margin-right: 6px;
-  color: #007f66;
-}
 
 .text{
-    margin-top: 40px;
-    font-size: clamp(12px, 2vw, 20px);
+    font-size: clamp(12px, 2vw, 18px);
     line-height: 1.6;
     color: #444;
     text-align: justify;
@@ -77,7 +88,7 @@ font-size: clamp(1.2rem, 1.2vw, 2rem);
     display: flex;
     gap: 10px;
     flex-direction: column;
-     align-items: flex-end;
+    align-items: flex-end;
 }
 
  

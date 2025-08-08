@@ -10,7 +10,7 @@ const dataSchema = new mongoose.Schema({
   location: { type: String, required: true },
   difficulty: { type: String, required: true },
   interest: { type: String, required: true },
-  tags: { type: [String], required: true },
+  tags: { type: [String]}, // facultatif
   description: { type: String, required: true },
   url: { type: String }, // facultatif
   images:  [

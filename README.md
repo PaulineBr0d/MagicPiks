@@ -25,7 +25,7 @@ https://www.figma.com/design/GC5v95K5CKXshqJNZi0CTG/projet_formation?node-id=3-1
 
 ## Prérequis
 
-- Node.js (version 16+ recommandée)  
+- Node.js  
 - MongoDB local ou service cloud (ex : MongoDB Atlas)  
 - Compte Heroku (pour déploiement)
 
@@ -83,10 +83,8 @@ heroku open
 
 ## À venir / recommandations
 
-- Héberger les images sur un service spécialisé (ex: Cloudinary)  
-- Modifier la base pour stocker les URLs d’images externes    
-- Ajouter des tests automatisés  
-- Ajouter une gestion des erreurs plus fine côté frontend  
+- Ajouter un formulaire pour ajouter une rando et alimenter la BDD 
+- Lors de cet ajout, transfert des photos sur cloudinary pour hébergement
 - Ajouter un système d’authentification si besoin
 
 ---

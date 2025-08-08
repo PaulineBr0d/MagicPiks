@@ -113,7 +113,7 @@ function loadDetail() {
 
   fetch(`http://localhost:3000/api/data/${id}`) 
     .then(res => {
-      if (!res.ok) throw new Error('Rando introuvable');
+      if (!res.ok) throw new Error('Rando introuvable 😕');
       return res.json();
     })
     .then(rando => {
@@ -134,26 +134,28 @@ function loadDetail() {
       const detail = document.createElement('div');
       detail.className = 'detail';
       detail.innerHTML = `
+      <div class="left-card">
         <div class="content">
+        <div class="sub-title">
+          <h2>${rando.title}</h2>
+          <span>${linkHTML}</span>
+            </div>
+        
           <div class="main-info">
-            <div class="sub-title">
-              <h2>${rando.title}</h2>
-              ${linkHTML}
-              <div class="date">
-                <p><i class="fa-regular fa-calendar-days"></i> ${formattedDate}</p>
-              </div>
-            </div>
-            <div class="text">
-              <p>${rando.description}</p>
-            </div>
-          </div>  
           <div class="detail-menu">
+          <h4 class="menu-card menu-date"><span class="icon">${formattedDate}</span></h4>
             <h4 class="menu-card menu-location"><span class="icon">${rando.location}</span></h4>
             <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</span></h4>
             <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</span></h4>
             <h4 class="menu-card menu-tag tag-card"><span class="icon">${rando.tags.join(', ')}</span></h4>
-          </div>
-        </div> 
+        </div>  
+           <div class="text">
+              <p>${rando.description}</p>
+                </div>
+            </div>
+             </div> 
+          </div> 
+          <div class="right-content">
         <div class="map">
           <button id="first"></button>
           <button id="next"></button>
@@ -166,6 +168,7 @@ function loadDetail() {
             </div> 
           </div> 
         </div>
+        </div> 
       `;
 
       main.appendChild(detail);
