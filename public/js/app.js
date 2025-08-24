@@ -1,4 +1,4 @@
-fetch('/api/data') 
+fetch('https://mon-app-node-c73ee22982be.herokuapp.com/api/data') 
   .then(res => res.json())
   .then(data => {
     const page = document.body.getAttribute('data-page');
