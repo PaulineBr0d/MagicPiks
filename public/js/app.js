@@ -43,7 +43,9 @@ function extractCategories(data) {
 // PAGE INDEX : Affiche les 4 dernières randos
 function loadIndex(data) {
   const gallery = document.querySelector('.gallery');
-  const lastFour = [...data].slice(-4).reverse();
+  const lastFour = [...data]
+    .sort((a, b) => new Date(b.date) - new Date(a.date)) //
+    .slice(0, 4); 
   lastFour.forEach((rando, index)  => {
     const isSecond = index === 1;
     const bloc = document.createElement('div');
@@ -84,6 +86,7 @@ function loadListingFiltered(data) {
   }
 
   filtered.forEach(rando => {
+    const tagsHtml = rando.tags.map(tag => `<h4 class="menu-card menu-tag tag-card"><span class="icon">${tag}</span></h4>`).join('');
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
@@ -97,7 +100,7 @@ function loadListingFiltered(data) {
           <h4 class="menu-card menu-location"><span class="icon">${rando.location}</h4>
           <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</h4>
           <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</h4>
-          <h4 class="menu-card menu-tag tag-card"><span class="icon"> ${rando.tags[0]}</h4>
+          ${tagsHtml}
         </span>
       </div>`;
     containerFilter.appendChild(card);
@@ -118,18 +121,18 @@ function loadDetail() {
     })
     .then(rando => {
       const rawDate = new Date(rando.date);
-      const options = { day: 'numeric', month: 'long', year: 'numeric' };
-      const formattedDate = rawDate.toLocaleDateString('fr-FR', options);
+      const day = String(rawDate.getDate()).padStart(2, '0');
+      const month = String(rawDate.getMonth() + 1).padStart(2, '0');
+      const year = String(rawDate.getFullYear());
+      const formattedDate = `${day}/${month}/${year}`;
 
-      /*const imagesHTML = rando.images
-        .map(num => `<div class="img-detail"><img src="images/${rando._id}_${num}.webp" alt="photo${num}"></div>`)
-        .join('');*/
       const imagesHTML = rando.images
       .map(img => `<div class="img-detail"><img src="${img.url}" alt="${img.public_id}"></div>`)
       .join('');
       const linkHTML = rando.url
         ? `<a href="${rando.url}" target="_blank"><i class="fa-solid fa-link"></i></a>`
         : `<i class="fa-solid fa-link-slash"></i>`;
+      const highlightedDescription = highlightTagsInDescription(rando.description, rando.tags);
 
       const detail = document.createElement('div');
       detail.className = 'detail';
@@ -147,10 +150,10 @@ function loadDetail() {
             <h4 class="menu-card menu-location"><span class="icon">${rando.location}</span></h4>
             <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</span></h4>
             <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</span></h4>
-            <h4 class="menu-card menu-tag tag-card"><span class="icon">${rando.tags.join(', ')}</span></h4>
+         
         </div>  
            <div class="text">
-              <p>${rando.description}</p>
+              <p>${highlightedDescription}</p>
                 </div>
             </div>
              </div> 
@@ -196,7 +199,7 @@ function initFilters() {
       else if (category === 'Intérêt') params.set('interest', value);
       else if (category === 'Tag') params.set('tag', value);
 
-      window.location.href = `listing.html?${params.toString()}`;
+      window.location.href = `/listing.html?${params.toString()}`;
     });
   });
 }
@@ -206,7 +209,7 @@ function initFilters() {
 function generateMenusFromData(data) {
    
   const menuContainer = document.getElementById('menu-container');
-  menuContainer.innerHTML = ''; // Clear existing menus if needed
+  menuContainer.innerHTML = ''; 
 
   const classes = {
     'Massif': 'menu-location',
@@ -237,7 +240,7 @@ function generateMenusFromData(data) {
     const dropdown = document.createElement('ul');
     dropdown.classList.add('menu-dropdown');
 
-    values.forEach((val) => {
+      values.sort().forEach((val) => {
       const li = document.createElement('li');
       li.textContent = val;
       dropdown.appendChild(li);
@@ -281,4 +284,28 @@ function initMenuListeners() {
       }
     });
   });
+}
+
+//Pour styliser les tags dans la page détail
+function highlightTagsInDescription(description, tags) {
+  let highlighted = description;
+
+  tags.forEach(tag => {
+    
+    let escapedTag = tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    escapedTag = escapedTag.replace(/\\\(s\\\)/g, 's?');
+
+    const useWordBoundaries = /^[a-zA-Z0-9]+s?\??$/.test(tag.replace(/\(s\)/, 's')); 
+
+    const pattern = useWordBoundaries
+      ? `\\b(${escapedTag})\\b`
+      : `(${escapedTag})`;
+
+    const regex = new RegExp(pattern, 'gi');
+
+    highlighted = highlighted.replace(regex, `<span class="highlight-tag">$1</span>`);
+  });
+
+  return highlighted;
 }

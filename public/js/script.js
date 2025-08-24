@@ -88,7 +88,7 @@ function initSlider(imageCount) {
       nextBtn.addEventListener("click", () => {
         if (currentIndex < total - 1) {
          currentIndex++;
-        } 
+        }  
         slides.style.transform = `translateX(-${currentIndex * 100}%)`;
       });
     }

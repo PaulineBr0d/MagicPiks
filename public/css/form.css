@@ -8,6 +8,8 @@ form {
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   margin-bottom: 60px;
+  overflow-y: auto;
+  max-height: 100%;
 }
 
 /* Grille 2 colonnes */
@@ -92,6 +94,11 @@ form button[type="submit"] {
 
 form button[type="submit"]:hover {
   background-color: #246b45;
+}
+
+#logoutBtn {
+  margin-top: 10px;
+  padding: 5px;
 }
 
 /* Messages */

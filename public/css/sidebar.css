@@ -101,7 +101,7 @@ li{
 
   
 .menu-title .icon::before {
-    font-size: clamp(10px, 1.5vw, 24px);
+    width: clamp(10px, 1.5vw, 24px);
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     margin-right: 8px;
@@ -109,12 +109,11 @@ li{
     background-color: #444;
     color: #B4B3B3;
 }
-
-.menu-location .icon::before { content: "\f124"; }
+.menu-location .icon::before { content: "\f0ac"; }
 .menu-difficult .icon::before { content: "\f201"; }
 .menu-heart .icon::before { content: "\f08a"; }
-.menu-tag .icon::before { content: "\f02b"; }    
-.menu-date .icon::before { content: "\f073"; }  
+.menu-tag .icon::before { content: "\f02c"; }    
+.menu-date .icon::before { content: "\f2d0"; }  
 
 #reset-menu:hover {
     transform: rotate(-90deg);

@@ -95,7 +95,7 @@
     background-color: #575454;
     color: #B4B3B3;
     font-weight: normal;
-    width: clamp(125px, 20vw, 250px);  
+    width: clamp(125px, 12vw, 280px);  
   
 }
 
@@ -110,8 +110,8 @@
     color: #B4B3B3;
 }
 
-.menu-location .icon::before { content: "\f124"; }
+/*.menu-location .icon::before { content: "\f124"; }
 .menu-difficult .icon::before { content: "\f201"; }
 .menu-heart .icon::before { content: "\f08a"; }
-.menu-tag .icon::before { content: "\f02b"; }    
+.menu-tag .icon::before { content: "\f02c"; } */   
 

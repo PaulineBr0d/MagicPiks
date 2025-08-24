@@ -1,3 +1,21 @@
+
+/*require('dotenv').config()
+const Admin = require('./admin');
+const bcrypt = require('bcrypt');
+
+async function createAdmin() {
+  const existing = await Admin.findOne({ email: ADMIN_EMAIL });
+  if (!existing) {
+    const hashed = await bcrypt.hash(ADMIN_PASSWORD, 10);
+    await Admin.create({ email: "admin", password: hashed });
+    console.log("Admin créé !");
+  }
+}
+
+module.exports = async function seedDatabase() {
+  await createAdmin();
+};
+
 const Data = require("./data");
 
 const randos = [
@@ -8,8 +26,8 @@ const randos = [
     "location": "Vallée d'Aoste",
     "difficulty": "Moyen",
     "interest": "Fort",
-    "tags": ["Lac", "Torrent"],
-    "description": "Première randonnée de notre séjour dans la vallée d'Aoste. Pause au lac assez fréquenté, vallon très beau !",
+    "tags": ["Lac(s)", "Torrent"],
+    "description": "Première randonnée de notre séjour dans la vallée d'Aoste. Pause au lac assez fréquenté, vallon très beau avec son torrent !",
     "url": "https://www.altituderando.com/Lac-de-Loie-2354m-en-boucle-par-Lillaz-et-le-vallon-de-Bardoney",
     "images": [
       {
@@ -37,8 +55,8 @@ const randos = [
     "location": "Vallée d'Aoste",
     "difficulty": "Moyen",
     "interest": "Moyen",
-    "tags": ["Lac"],
-    "description": "Randonnée sympa. Attention à bien s'orienter lors de la petite section hors sentier.",
+    "tags": ["Lac(s)"],
+    "description": "Randonnée sympa avec pause au lac. Attention à bien s'orienter lors de la petite section hors sentier.",
     "url": "https://www.altituderando.com/Pointe-de-Metz-2552m-Pointe-de-Chaligne-2607m-et-Lago-Fallere-en-boucle-par",
     "images": [
       {
@@ -58,8 +76,8 @@ const randos = [
     "location": "Vallée d'Aoste",
     "difficulty": "Moyen",
     "interest": "Fort",
-    "tags": ["Chamois", "Bouquetin", "Gran-Paradiso"],
-    "description": "Très belle randonnée pas trop fréquentée, belle vue sur Gran Paradiso au col.",
+    "tags": ["Chamois", "Bouquetin(s)"],
+    "description": "Très belle randonnée pas trop fréquentée, belle vue sur Gran-Paradiso au col. Vu chamois lors de la montée au col. Et les bouquetins juste après le col",
     "url": "https://www.komoot.com/fr-fr/smarttour/709796",
     "images": [
       {
@@ -91,7 +109,7 @@ const randos = [
     "location": "Vallée d'Aoste",
     "difficulty": "Difficile",
     "interest": "Fort",
-    "tags": ["Lac", "Refuge", "Cascade"],
+    "tags": ["Lac(s)", "Refuge", "Cascade"],
     "description": "Belle randonnée depuis Thumel. Montée le matin au lago Goletta, vue sur le glacier (on ne s'est pas attardé vu le vent glacial.) Nous avons déjeuné au refuge Benevolo puis fait une boucle l'après-midi sur le chemin 13C avec une belle vue sur une impressionante cascade et lac Tsanteleina et sa couleur turquoise.",
     "url": "https://fr.wikiloc.com/itineraires-randonnee/rifugio-benevolo-lago-goletta-colle-goletta-via-thumel-altavia-80203405",
     "images": [
@@ -124,8 +142,8 @@ const randos = [
     "location": "Vallée d'Aoste",
     "difficulty": "Difficile",
     "interest": "Moyen",
-    "tags": ["Lac", "Refuge", "Bouquetin"],
-    "description": "Après avoir atteint le refuge sur une piste facile, nous sommes monté au lago di San Martino pour la pause déjeuner. Puis nous avons decide d'effectuer le retour par le balcon avec sur le parcours quelques difficultés et grimpettes  : ce fut une très longue randonnée (j'ai trouvé un topo qui correspond : + 30 km‑effort…) On a fait une break ensuite !",
+    "tags": ["Lac(s)", "Refuge", "Bouquetin(s)"],
+    "description": "Après avoir atteint le refuge sur une piste facile, nous sommes monté au lac pour la pause déjeuner. Puis nous avons decide d'effectuer le retour par le balcon avec sur le parcours quelques difficultés et grimpettes (vu un bouqeutin) : ce fut une très longue randonnée (j'ai trouvé un topo qui correspond : + 30 km‑effort…) On a fait une break ensuite !",
     "url": "https://www.altituderando.com/Lago-di-San-Martino-2770m-en-boucle-par-le-refuge-Bezzi-et-le-col-de-la-Becca",
     "images": [
       {
@@ -153,8 +171,8 @@ const randos = [
     "location": "Vallée d'Aoste",
     "difficulty": "Difficile",
     "interest": "Fort",
-    "tags": ["Chamois", "Bouquetin", "Glacier"],
-    "description": "Départ de Valnontey pour le bivouac à presque 3200 m soit 1500 m de dénivelé en 10 kms de montée. Jamais vu autant de bouquetins, par contre presque pas croisé d'humains ! Vu sur le glacier.",
+    "tags": ["Chamois", "Bouquetin(s)", "Glacier"],
+    "description": "Départ de Valnontey pour le bivouac à presque 3200 m soit 1500 m de dénivelé en 10 kms de montée. Jamais vu autant de bouquetins, vu quelques chamois par contre presque pas croisé d'humains ! Arrivé au bivouac, vu sur le glacier.",
     "url": "https://www.inalto.org/fr/rapports/alpinisme/bivacco-pol-grappein-da-valnontey",
     "images": [
       {
@@ -207,8 +225,8 @@ const randos = [
     "location": "Vallée d'Aoste",
     "difficulty": "Difficile",
     "interest": "Moyen",
-    "tags": ["Lac", "Pierrier"],
-    "description": "Dernière randonnée de notre séjour dans la vallée d'Aoste. On a déjeuné au refuge Grauson avant de poursuivre jusqu'au col des Laures. Assez difficile dans la dernière montée avec de gros blocs rocheux. Encore 20 km A/R et 1200 m de dénivelé !",
+    "tags": ["Lac(s)", "Pierrier"],
+    "description": "Dernière randonnée de notre séjour dans la vallée d'Aoste. On a déjeuné au refuge Grauson avant de poursuivre jusqu'au col des Laures. Assez difficile dans la dernière montée dans le pierrier avec de gros blocs rocheux. Encore 20 km A/R et 1200 m de dénivelé !",
     "url": "https://www.altituderando.com/Laghi-di-Lussert-et-Mont-des-Laures-3121m",
     "images": [
       {
@@ -232,8 +250,8 @@ const randos = [
     "location": "Vercors",
     "difficulty": "Moyen",
     "interest": "Moyen",
-    "tags": ["Pierrier", "Bouquetin"],
-    "description": "Randonnée faite pour échapper à la météo caniculaire à Lyon. Pas d'ombre après le vallon de Fauge. Descente par les pistes, peu d'intérêt. Break au resto du téléphérique (ouveert) et sieste au lac des Prés. Pas vu de bouquetins.",
+    "tags": ["Pierrier", "Lac(s)"],
+    "description": "Randonnée faite pour échapper à la météo caniculaire à Lyon. Pas d'ombre après le vallon de Fauge, notamment lors de la montée dans le pierrier. Descente par les pistes, peu d'intérêt. Break au resto du téléphérique (ouvert) et sieste au lac des Prés.",
     "url": "https://www.visorando.com/randonnee-pas-de-l-oeille-par-le-vallon-de-la-faug/",
     "images": [
       {
@@ -261,8 +279,8 @@ const randos = [
     "location": "Giffre",
     "difficulty": "Moyen",
     "interest": "Fort",
-    "tags": ["Bouquetin", "Cirque", "Refuge"],
-    "description": "Très fréquentée et encore le parking semblait vide mais cirque magnifique. Grande harde de bouquetins, peu farouches. Le refuge n'ouvrait que le week-end suivant. A prolonger si plus de temps.",
+    "tags": ["Bouquetin(s)", "Cirque", "Refuge"],
+    "description": "Très fréquentée et encore le parking semblait vide mais cirque magnifique. Grande harde de bouquetins, peu farouches. Le refuge n'ouvrait que le week-end suivant. A refaire et prolonger si plus de temps.",
     "url": "https://www.visorando.com/randonnee-les-chalets-de-sales-depuis-le-lignon/",
     "images": [
       {
@@ -336,8 +354,8 @@ const randos = [
     "location": "Auvergne",
     "difficulty": "Facile",
     "interest": "Moyen",
-    "tags": ["Ruine", "Rapace"],
-    "description": "Chemins agréables (vu un milan cette fois-ci photographié) avec quelques beaux points de vue sur les gorges, pas fréquentés sauf au château. D'ailleurs au départ, ne pas louper le sentier (pas visible) Attention à  la dernière montée, difficile sous la chaleur (un vrai chemin de croix!)",
+    "tags": ["Rapace(s)"],
+    "description": "Chemins agréables (vu un rapace, un milan cette fois-ci photographié) avec quelques beaux points de vue sur les gorges, pas fréquentés sauf au château. D'ailleurs au départ, ne pas louper le sentier (pas visible) Attention à  la dernière montée, difficile sous la chaleur (un vrai chemin de croix!)",
     "url": "https://www.visorando.com/randonnee-le-site-d-alleuze/",
     "images": [
       {
@@ -362,7 +380,7 @@ const randos = [
     "difficulty": "Moyen",
     "interest": "Moyen",
     "tags": ["360°"],
-    "description": "Très frequentée au sommet si téléphérique ouvert, descente sur piste moins intéressante. Aucune ombre. Vu milans (j'ai loupé la photo) Restos au téléphérique et au départ.",
+    "description": "Très frequentée au sommet et son 360° si téléphérique ouvert, descente sur piste moins intéressante. Aucune ombre. Vu milans (j'ai loupé la photo) Restos au téléphérique et au départ.",
     "url": "https://www.visorando.com/randonnee-plomb-du-cantal-a-partir-du-col-de-prat-/",
     "images": [
       {
@@ -382,8 +400,8 @@ const randos = [
     "location": "Belledonne",
     "difficulty": "Moyen",
     "interest": "Moyen",
-    "tags": ["Névé", "Cascade", "Lac"],
-    "description": "Assez fréquentée aux lacs. Pour la descente, pris par la brèche Nord vu l'enneigement. Dernier km sur la route principale moins intéressant...",
+    "tags": ["Névé(s)", "Cascade", "Lac(s)"],
+    "description": "Cascade le l'Oursière impressionnante. Assez fréquentée aux lacs. Pour la descente, pris par la brèche Nord vu les nombreux névés Dernier km sur la route principale moins intéressant...",
     "url": "https://www.visorando.com/randonnee-lacs-robert-par-l-oursiere/",
     "images": [
       {
@@ -411,7 +429,7 @@ const randos = [
     "location": "Dévoluy",
     "difficulty": "Moyen",
     "interest": "Fort",
-    "tags": ["Névé", "Bouquetin"],
+    "tags": ["Névé(s)", "Bouquetin(s)"],
     "description": "Randonnée stoppée à cause de nombreux névés au col. Nombreux bouquetins. A refaire !",
     "url": "https://www.visorando.com/randonnee-boucle-des-trois-vallons-a-saint-etienne/",
     "images": [
@@ -440,8 +458,8 @@ const randos = [
     "location": "Dévoluy",
     "difficulty": "Moyen",
     "interest": "Fort",
-    "tags": ["Névé", "Chamois", "Cascade"],
-    "description": "Très belle rando, faite en A/R à cause de l'enneigement. Vu quelques chamois juste avant de repartir de la pause déjeuner.",
+    "tags": ["Névé(s)", "Chamois", "Cascade"],
+    "description": "Très belle rando avec une magnifique cascade, faite en A/R à cause de nombreux névés. Vu quelques chamois juste avant de repartir de la pause déjeuner.",
     "url": "https://www.visorando.com/randonnee-col-de-l-aiguille/",
     "images": [
       {
@@ -473,8 +491,8 @@ const randos = [
     "location": "Dévoluy",
     "difficulty": "Moyen",
     "interest": "Moyen",
-    "tags": ["360°"],
-    "description": "Randonnée pour mise en bouche d'un week-end dans le Dévoluy. Intérêt pour faune (serpents, faucons crécerelle ?) & flore.",
+    "tags": ["360°", "Rapaces(s)"],
+    "description": "Randonnée pour mise en bouche d'un week-end dans le Dévoluy. Beau 360° sur le massif. Intérêt pour faune (serpents, faucons crécerelle ?) & flore.",
     "url": "https://www.visorando.com/randonnee-cretes-de-baumes-par-les-etroits/",
     "images": [
       {"url": "https://res.cloudinary.com/djmn3bzxe/image/upload/v1754548800/1_ffnfft.jpg", "public_id": "v1754548800/1_ffnfft"},
@@ -488,8 +506,8 @@ const randos = [
     "location": "Jura",
     "difficulty": "Moyen",
     "interest": "Moyen",
-    "tags": ["Névé", "Vent"],
-    "description": "1ère montée raide (sur piste) ensuite aucune difficulté. Attention très venteux (bien se couvrir.)",
+    "tags": ["Névé(s)", "Vent"],
+    "description": "1ère montée raide (sur piste) ensuite aucune difficulté. Il restait quelques névés. Attention au vent sur les crêtes (bien se couvrir.)",
     "url": "https://www.visorando.com/randonnee-menthieres-cret-de-la-goutte-par-le-sac-/",
     "images": []
   },
@@ -501,7 +519,7 @@ const randos = [
     "difficulty": "Facile",
     "interest": "Moyen",
     "tags": ["Volcan"],
-    "description": "1ère courte randonnée sur Lanzarote faite le matin. Assez frequentée. Balade facile qui permet de rentrer dans le cratère et d'en faire le tour.",
+    "description": "1ère courte randonnée sur Lanzarote faite le matin et premier volcan. Assez frequentée. Balade facile qui permet de rentrer dans le cratère et d'en faire le tour.",
     "url": "https://www.visorando.com/randonnee-caldera-de-los-cuervos/",
     "images": [
       {"url": "https://res.cloudinary.com/djmn3bzxe/image/upload/v1754548162/1_ebch9g.jpg", "public_id": "v1754548162/1_ebch9g"},
@@ -535,7 +553,7 @@ const randos = [
     "difficulty": "Facile",
     "interest": "Fort",
     "tags": ["Volcan", "360°"],
-    "description": "Randonnée sur la crête de la caldera.  Assez frequentée, partir tôt aussi pour la chaleur de la pierre volcanique et le parking rapidement rempli. Montée assez raide mais belles vues.",
+    "description": "Randonnée sur la crête du volcan et un beau 360°.  Assez frequentée, partir tôt aussi pour la chaleur de la pierre volcanique et le parking rapidement rempli. Montée assez raide mais belles vues.",
     "url": "https://www.visorando.com/randonnee-caldera-blanca-lanzarote/",
     "images": [
       {"url": "https://res.cloudinary.com/djmn3bzxe/image/upload/v1754548081/1_mz9ixn.jpg", "public_id": "v1754548081/1_mz9ixn"},
@@ -553,7 +571,7 @@ const randos = [
     "difficulty": "Facile",
     "interest": "Moyen",
     "tags": ["Vignoble", "Volcan", "360°"],
-    "description": "Départ de la Asomada (Airbnb), randonnée à travers les vignes faite en sens inverse du topo. Pas grande monde. Fait l'A/R rapide au sommet du Guardilama (cratère aménagé en jardin)",
+    "description": "Départ de la Asomada (Airbnb), randonnée à travers le vignoble faite en sens inverse du topo. Pas grande monde. Fait l'A/R rapide au sommet du Guardilama (volcan et ses vignes qui poussent dans le cratère)",
     "url": "https://www.visorando.com/randonnee-vignoble-de-la-geria/",
     "images": [
       {"url": "https://res.cloudinary.com/djmn3bzxe/image/upload/v1754548350/1_hmyiub.jpg", "public_id": "v1754548350/1_hmyiub"},
@@ -569,7 +587,7 @@ const randos = [
     "difficulty": "Facile",
     "interest": "Moyen",
     "tags": ["Volcan", "Canyon"],
-    "description": "Fait le détour pour visiter le canyon (un peu de monde), partie la plus intéressante. Puis montée assez raide pour le sommet (de plus en plus brumeux au fil des jours)",
+    "description": "Fait le détour pour visiter le canyon (un peu de monde), partie la plus intéressante. Puis montée assez raide pour le sommet du volcan (de plus en plus brumeux au fil des jours)",
     "url": "https://www.visorando.com/randonnee-volcan-montana-blanca-en-boucle-depuis-l/",
     "images": [
       {"url": "https://res.cloudinary.com/djmn3bzxe/image/upload/v1754548414/1_jwtrz7.jpg", "public_id": "v1754548414/1_jwtrz7"},
@@ -585,7 +603,7 @@ const randos = [
     "difficulty": "Facile",
     "interest": "Moyen",
     "tags": ["Vent", "Océan"],
-    "description": "Départ d'Haria pour monter vers le col (plusieurs traversées de la route principale) Après on se retrouve dans les jardins. Beau belvèdere sur la plage de Famara.  Au point 5, on a repris directement vers le village et non sur la crête vu le vent. Peu fréquenté",
+    "description": "Départ d'Haria pour monter vers le col (plusieurs traversées de la route principale) Après on se retrouve dans les jardins. Beau belvèdere sur la plage de Famara et l'océan.  Au point 5, on a repris directement vers le village et non sur la crête vu le vent. Peu fréquenté",
     "url": "https://www.visorando.com/randonnee-boucle-au-depart-d-haria/",
     "images": [
       {"url": "https://res.cloudinary.com/djmn3bzxe/image/upload/v1754547891/1_pxaeay.jpg", "public_id": "v1754547891/1_pxaeay"},
@@ -599,7 +617,7 @@ const randos = [
     "location": "Queyras",
     "difficulty": "Facile",
     "interest": "Moyen",
-    "tags": ["Marmotte"],
+    "tags": ["Marmotte(s)"],
     "description": "Jour d'arrivée à Molines, petite rando au départ de l'Airbnb pour mise en jambes. Vu quelques marmottes.",
     "url": "https://www.visorando.com/randonnee-tour-des-hameaux-de-laigue-agnelle/",
     "images": [
@@ -614,8 +632,8 @@ const randos = [
     "location": "Queyras",
     "difficulty": "Moyen",
     "interest": "Moyen",
-    "tags": ["Marmotte", "360°"],
-    "description": "Belle randonnée pas très fréquentée en partie sur les crêtes au-dessus des hameaux de Molines. Belle vue sur les Ecrins.",
+    "tags": ["Marmotte(s)", "360°"],
+    "description": "Belle randonnée pas très fréquentée en partie sur les crêtes au-dessus des hameaux de Molines, aperçu des marmottes qui profitaient du lever du jour. 360° avec une belle vue sur les Ecrins.",
     "url": "https://www.visorando.com/randonnee-la-gardiole-de-l-alp/",
     "images": [
       {"url": "https://res.cloudinary.com/djmn3bzxe/image/upload/v1754302620/1_nbflbn.jpg", "public_id": "v1754302620/1_nbflbn"},
@@ -632,8 +650,8 @@ const randos = [
     "location": "Queyras",
     "difficulty": "Moyen",
     "interest": "Fort",
-    "tags": ["Lac", "Refuge", "Bouquetin", "360°"],
-    "description": "Beau 3000m accessible, à faire que ce soit pour le panorama ou les lacs Blanchet. Pause déjeuner au refuge de la Blanche, toujours aussi sympa pour te trouver une table même si tu n'as pas réservé !",
+    "tags": ["Lac(s)", "Refuge", "Bouquetin(s)", "360°"],
+    "description": "Beau 3000m accessible, à faire que ce soit pour le panorama du 360° ou les lacs Blanchet. Aperçu un bouquetin. Pause déjeuner au refuge de la Blanche, toujours aussi sympa pour te trouver une table même si tu n'as pas réservé !",
     "url": "https://www.visorando.com/randonnee-pic-de-caramantran-et-ses-lacs-depuis-l-/",
     "images": [
       {"url": "https://res.cloudinary.com/djmn3bzxe/image/upload/v1754302651/1_xvn4dm.jpg", "public_id": "v1754302651/1_xvn4dm"},
@@ -671,8 +689,8 @@ const randos = [
     "location": "Vanoise",
     "difficulty": "Moyen",
     "interest": "Fort",
-    "tags": ["Torrent", "Refuge", "Lac", "Glacier", "Bouquetin"],
-    "description": "Direction le col du Soufre dans le parc de la Vanoise. Nous n'avons pas fait les 23kms ni vu le glacier car les nuages s'accumulaient au col. Nous avons déjeuné à un petit lac avec cascade en-dessous du lac du Mont Coua. Puis nous sommes redescendu au refuge du Saut prendre le café où des bouquetins faisaient l'animation.",
+    "tags": ["Torrent", "Refuge", "Lac(s)", "Glacier", "Bouquetin(s)"],
+    "description": "Direction le col du Soufre dans le parc de la Vanoise le long du torrent du plan de Tuéda. Nous n'avons pas fait les 23kms ni vu le glacier car les nuages s'accumulaient au col. Nous avons déjeuné à un petit lac avec cascade en-dessous du lac du Mont Coua. Puis nous sommes redescendu au refuge du Saut prendre le café où des bouquetins faisaient l'animation.",
     "url": "https://www.visorando.com/randonnee-le-col-du-soufre-pour-un-belvedere-sur-l/",
     "images": [
       {
@@ -701,7 +719,7 @@ const randos = [
     "difficulty": "Difficile",
     "interest": "Fort",
     "tags": ["360°"],
-    "description": "Montée courte mais raide. Assez aérienne vers la fin. Attention à la descente, retrouver le bon chemin. Très fréquenté sur la partie du col Vieux. La vue est belle à plus de 3000m si les nuages (italiens) ne sont pas trop présents !",
+    "description": "Montée courte mais raide. Assez aérienne vers la fin. Attention à la descente, retrouver le bon chemin. Très fréquenté sur la partie du col Vieux. Le 360° est impressionnant à plus de 3000m si les nuages côté italien ne sont pas trop présents !",
     "url": "https://www.visorando.com/randonnee-le-pain-de-sucre-2/",
     "images": [
       {
@@ -742,7 +760,7 @@ const randos = [
     "location": "Alta Valle Varaita",
     "difficulty": "Moyen",
     "interest": "Moyen",
-    "tags": ["Lac"],
+    "tags": ["Lac(s)"],
     "description": "Départ de Ponte Pelvo pour 800m de dénivélé. Fait en A/R, mais possible de faire boucle. Dernière montée assez raide surtout pour une reprise après un virus...",
     "url": "https://fr.wikiloc.com/itineraires-randonnee/lago-della-camoscera-da-celle-di-bellino-54351923",
     "images": [
@@ -771,7 +789,7 @@ const randos = [
     "location": "Alta Valle Varaita",
     "difficulty": "Moyen",
     "interest": "Fort",
-    "tags": ["Lac", "Refuge", "Monviso", "Torrent"],
+    "tags": ["Lac(s)", "Refuge", "Torrent"],
     "description": "Jusqu'au refuge Vallanta en A/R. Randonnée assez frequentée, mais très belle le long du torrent. Il faisait assez frais au refuge.",
     "url": "https://www.alpicuneesi.it/itinerari/vallevaraita/1506.htm",
     "images": [
@@ -800,8 +818,8 @@ const randos = [
     "location": "Alta Valle Varaita",
     "difficulty": "Moyen",
     "interest": "Moyen",
-    "tags": ["Marmotte", "Rapace", "Fouine"],
-    "description": "Vers le Monte Ferra en A/R, montée au sommet non faite (arrivée da la nebbia) Nous avons croisé un berger et un autre randonneur. Rencontré une fouine. Et vu des rapaces.",
+    "tags": ["Marmotte(s)", "Rapace(s)", "Fouine(s)"],
+    "description": "Vers le Monte Ferra en A/R, montée au sommet non faite (arrivée da la nebbia) Nous avons croisé un berger et un autre randonneur. Sinon une fouine, quelques marmottes et des rapaces.",
     "url": "https://www.altituderando.com/Monte-Ferra-3094m",
     "images": [
       {
@@ -837,8 +855,8 @@ const randos = [
     "location": "Alta Valle Varaita",
     "difficulty": "Moyen",
     "interest": "Fort",
-    "tags": ["Marmotte", "Torrent"],
-    "description": "Départ de Sant'Anna. Très venteux au col. Très belle randonnée en A/R dans un cadre enchanteur ! (1000m de dénivelé pour 15kms au total)",
+    "tags": ["Marmotte(s)", "Torrent"],
+    "description": "Départ de Sant'Anna. Très venteux au col. Très belle randonnée en A/R dans un cadre enchanteur ! Déjeuner avec quelques marmottes. 1000m de dénivelé pour 15kms au total",
     "url": "https://cuneotrekking.com/itinerari/escursioni/escursione-al-monte-bellino-2942-m-valle-varaita/",
     "images": [
       {
@@ -874,8 +892,8 @@ const randos = [
     "location": "Aravis",
     "difficulty": "Moyen",
     "interest": "Moyen",
-    "tags": ["Chamois", "Bouquetin", "Mont-Blanc"],
-    "description": "Départ de la Giettaz de notre Airbnb (ne pas louper le point de vente de reblochons fermiers) Randonnée sympa pas fréquentée, vu un chamois et quelques bouquetins (apparemment maldades dans ce coin de Savoie) Beau point de vue sur le Mont-Blanc",
+    "tags": ["Chamois", "Bouquetin(s)", "Mont-Blanc"],
+    "description": "Départ de la Giettaz de notre Airbnb (ne pas louper le point de vente de reblochons fermiers) Randonnée sympa pas fréquentée, vu un chamois et quelques bouquetins (apparemment malades dans ce coin de Savoie) Beau point de vue sur le Mont-Blanc",
     "url": "https://www.visorando.com/randonnee-notre-dame-des-alpages-au-depart-de-la-g/",
     "images": [
       {
@@ -903,7 +921,7 @@ const randos = [
     "location": "Aravis",
     "difficulty": "Difficile",
     "interest": "Moyen",
-    "tags": ["Névé"],
+    "tags": ["Névé(s)"],
     "description": "Départ des Confins. Nous avons essayé le Passage du Père mais beaucoup trop enneigé et instable pour continuer. Nous sommes redescendu et fait une boucle par la Pierre marquée. Assez frequenté.",
     "url": "",
     "images": [
@@ -924,8 +942,8 @@ const randos = [
     "location": "Aravis",
     "difficulty": "Difficile",
     "interest": "Fort",
-    "tags": ["Névé", "Mont-Blanc"],
-    "description": "Montée raide dès le départ, peu frequentée. 1000m de dénivelé pour moins de 10km au total. Au sommet beau panorama, notamment sur le Mont Blanc si les nuages le permettent. Encore très enneigé (plusieurs fois on s'est enfoncé) et descente glissante (un petit doigt s'en souvient...)",
+    "tags": ["Névé(s)", "Mont-Blanc"],
+    "description": "Montée raide dès le départ, peu frequentée. 1000m de dénivelé pour moins de 10km au total. Au sommet beau panorama, notamment sur le Mont-Blanc si les nuages le permettent. Encore de nombreux névés (plusieurs fois on s'est enfoncé) et descente glissante (un petit doigt s'en souvient...)",
     "url": "https://www.visorando.com/randonnee-croisse-baulet-en-boucle-depuis-le-plan/",
     "images": [
       {
@@ -969,3 +987,4 @@ async function seedDatabase() {
 }
 
 module.exports = seedDatabase;
+*/

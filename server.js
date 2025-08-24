@@ -5,6 +5,16 @@ const path = require('path');
 
 const app = express();  
 
+// Configuration de la session dans Express
+const session = require('express-session');
+require('dotenv').config();
+app.use(session({
+  secret: process.env.SESSION_SECRET, // clé secrète pour signer les cookies
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } // mettre à true si HTTPS (Heroku)
+}));
+
 // Servir les fichiers statiques dans /public
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -12,14 +22,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(express.json());
 
-// Importer les fichiers nécessaires
-const db = require("./src/db");
+// Import des routes
+const authRoutes = require("./src/auth"); 
+
 const routes = require("./src/routes");
-const seedDatabase = require("./src/seed");
 
+// Montage des routes
+app.use("/api/auth", authRoutes);
 
-// Utilisation des routes API
-app.use("/api", routes);
+app.use("/api/data", routes);
+
+app.get('/api/config/cloudinary', (req, res) => {
+  res.json({
+    cloudName: process.env.CLOUD_NAME,
+    uploadPreset: process.env.UPLOAD_PRESET
+  });
+});
+
 
 // Gestion des erreurs globales
 app.use((err, req, res, next) => {
@@ -28,9 +47,12 @@ app.use((err, req, res, next) => {
 });
 
 // Connexion à la base et lancement du serveur
+const db = require("./src/db");
+/*const seedDatabase = require("./src/seed");*/
+
 db.connectToDatabase()
   .then(async () => {
-    await seedDatabase(); // si nécessaire
+    /*await seedDatabase();*/ // si nécessaire
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
       console.log(`Serveur en cours d'exécution sur le port ${PORT}`);
