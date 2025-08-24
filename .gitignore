@@ -6,3 +6,4 @@ package-lock.json
 *.log
 Thumbs.db
 .vscode/
+blog-frontend/
