@@ -1,4 +1,4 @@
-fetch('http://localhost:3000/api/data') 
+fetch('/api/data') 
   .then(res => res.json())
   .then(data => {
     const page = document.body.getAttribute('data-page');
@@ -114,7 +114,7 @@ function loadDetail() {
   main.innerHTML = '';
   const id = new URLSearchParams(window.location.search).get('id');
 
-  fetch(`http://localhost:3000/api/data/${id}`) 
+  fetch(`/api/data/${id}`) 
     .then(res => {
       if (!res.ok) throw new Error('Rando introuvable 😕');
       return res.json();
