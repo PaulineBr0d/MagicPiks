@@ -10,7 +10,7 @@ const session = require('express-session');
 
 // Middleware
 app.use(cors({
-  origin: "https://paulinebr0d.github.io/blog",
+  origin: "https://paulinebr0d.github.io",
   credentials: true
 }));
 app.set("trust proxy", 1);
