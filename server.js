@@ -13,15 +13,16 @@ app.use(cors({
   origin: "http://localhost:5500", // ou ton domaine frontend
   credentials: true
 }));
+app.set("trust proxy", 1);
 
 app.use(session({
   secret: process.env.SESSION_SECRET, // clé secrète pour signer les cookies
   resave: false,
   saveUninitialized: false,
 cookie: { 
-    secure: false,
+    secure: true,
     httpOnly: true,
-    sameSite: 'lax'
+    sameSite: 'none'
   }
 }));
 
