@@ -19,7 +19,10 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5500", // ou ton domaine frontend
+  credentials: true
+}));
 
 app.use(express.json());
 

@@ -12,6 +12,7 @@
     <script src="/js/script.js" defer></script>
     <script src="/js/form.js" defer></script>
     <script src="/js/app.js" defer></script>
+     <script src="js/login.js" defer></script>
 </head>
 <body style="display: inline-block">
    <form id="loginForm">
@@ -24,13 +25,8 @@
     <button type="submit">Se connecter</button>
     <p id="loginError" style="color: red;"></p>
   </form>
-  <script src="js/login.js"></script>
-  <script>
-  document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await fetch("/api/logout", { method: "POST" });
-    window.location.href = "login.html";
-  });
-</script>
+ 
+
 
 </body>
 </html>
