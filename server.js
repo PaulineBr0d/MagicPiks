@@ -10,7 +10,7 @@ const session = require('express-session');
 
 // Middleware
 app.use(cors({
-  origin: "http://localhost:5500", // ou ton domaine frontend
+  origin: "https://paulinebr0d.github.io/blog",
   credentials: true
 }));
 app.set("trust proxy", 1);
