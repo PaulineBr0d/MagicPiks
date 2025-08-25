@@ -7,22 +7,28 @@ const app = express();
 
 // Configuration de la session dans Express
 const session = require('express-session');
-require('dotenv').config();
-app.use(session({
-  secret: process.env.SESSION_SECRET, // clé secrète pour signer les cookies
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false } // mettre à true si HTTPS (Heroku)
-}));
-
-// Servir les fichiers statiques dans /public
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware
 app.use(cors({
   origin: "http://localhost:5500", // ou ton domaine frontend
   credentials: true
 }));
+
+app.use(session({
+  secret: process.env.SESSION_SECRET, // clé secrète pour signer les cookies
+  resave: false,
+  saveUninitialized: false,
+cookie: { 
+    secure: false,
+    httpOnly: true,
+    sameSite: 'lax'
+  }
+}));
+
+// Servir les fichiers statiques dans /public
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 app.use(express.json());
 
