@@ -1,8 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const Admin = require("./src/admin"); // Chemin à ajuster selon ton projet
-
+const Admin = require("./src/admin"); 
 async function main() {
   const [,, email, password] = process.argv;
 

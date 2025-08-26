@@ -23,8 +23,19 @@ router.post("/login", async (req, res) => {
 
 // Déconnexion
 router.post("/logout", (req, res) => {
-  req.session.destroy(() => {
-    res.json({ message: "Déconnecté" });
+  req.session.destroy(err => {
+    if (err) {
+      console.error("Erreur lors de la destruction de la session :", err);
+      return res.status(500).json({ message: "Erreur lors de la déconnexion" });
+    }
+      res.clearCookie("connect.sid", {
+      path: "/",             
+      httpOnly: true,
+      secure: true,           
+      sameSite: "none"       
+    });
+
+    return res.json({ message: "Déconnecté" });
   });
 });
 
