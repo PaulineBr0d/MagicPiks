@@ -6,11 +6,6 @@ const path = require('path');
 const app = express();  
 
 
-const allowedOrigins = [
-  "http://localhost:5500",
-  "http://127.0.0.1:5500",
-  "https://paulinebr0d.github.io"
-];
 // Configuration de la session dans Express
 const session = require('express-session');
 
@@ -25,7 +20,7 @@ const corsOptions = {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      console.error("❌ Origine non autorisée :", origin);
+      console.error("Origine non autorisée :", origin);
       callback(new Error("Not allowed by CORS"));
     }
   },
@@ -37,7 +32,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Active aussi pour les requêtes préliminaires (preflight)
-app.options('*', cors(corsOptions));
+app.options('/*', cors(corsOptions));
 
 app.set("trust proxy", 1);
 
