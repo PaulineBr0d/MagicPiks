@@ -31,8 +31,6 @@ const corsOptions = {
 // Active CORS pour toutes les routes
 app.use(cors(corsOptions));
 
-// Active aussi pour les requêtes préliminaires (preflight)
-app.options('/*', cors(corsOptions));
 
 app.set("trust proxy", 1);
 
