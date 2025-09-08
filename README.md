@@ -23,6 +23,8 @@ L'API est déployée en ligne via **Render** et consommée par un frontend en **
 
 ## Fonctionnalités
 
+L’API permet à un administrateur de gérer les randonnées via un CRUD partiel, avec authentification sécurisée.
+
 - Connexion **Admin** avec sessions & cookies sécurisés
 - **CRUD** partiel sur les randonnées :
   - `GET` toutes les randonnées
@@ -34,14 +36,14 @@ L'API est déployée en ligne via **Render** et consommée par un frontend en **
 
 ## Principales étapes de création de l'API
 
- 1. Initialisation du projet Node.js
- 2. Mise en place du serveur Express (`server.js`) a
- 3. Connexion à MongoDB (`db.js`)
- 4. Création des modèles de données via Mongoose (`data.js`)
- 5. Injection des randonnées de test en base (`seed.js`)
- 6. Création des routes de l’API (`routes.js`)
- 7. Puis celles de l'authentification Admin (`auth.js`)
- 8. Déploiement sur Render 
+ - Initialisation du projet Node.js
+ - Mise en place du serveur Express (`server.js`) 
+ - Connexion à MongoDB (`db.js`)
+ - Création des modèles de données via Mongoose (`data.js`)
+ - Injection des randonnées de test en base (`seed.js`)
+ - Création des routes de l’API (`routes.js`)
+ - Puis celles de l'authentification Admin (`auth.js`)
+ - Déploiement sur Render 
 
 
 ---
@@ -62,19 +64,19 @@ L'API est déployée en ligne via **Render** et consommée par un frontend en **
 
 ## Middleware & sécurité
 
-- Activation de CORS pour autoriser le frontend à accéder à l’API
+- **CORS activé** pour autoriser les requêtes du frontend
 - Utilisation de `credentials: true` pour permettre les cookies cross-domain
-- Middleware de session (`express-session`) avec cookies sécurisés
+- Middleware de session sécurisé via `express-session`
 
 
 ---
 
-## Authentification sécurisée
+## Authentification administrateur
 
-Le backend inclut un système d’authentification réservé à l’administrateur du site :
+Le backend comprend un système d’authentification réservé à l’administrateur du site :
 
-- Les identifiants sont enregistrés dans une **collection MongoDB** dédiée (`admin.js`)
-- Les **mots de passe sont hashés** avec `bcrypt` avant enregistrement
-- À la connexion (`POST /api/auth/login`), les identifiants sont vérifiés côté serveur
-- Si les identifiants sont valides, une **session** est créée et un **cookie sécurisé** est envoyé au client (`httpOnly`)
-- Certaines routes (comme `POST /api/data`) sont protégées par un middleware `isAdminLoggedIn.js`
+- Les identifiants sont stockés dans une **collection dédiée** (`admin`)
+- Les **mots de passe sont hashés** avec `bcrypt` avant stockage
+- Lors d’une tentative de connexion (`POST /api/auth/login`), les identifiants sont vérifiés côté serveur
+- Si validés, une **session est créée** et un **cookie httpOnly sécurisé** est envoyé au client
+- Certaines routes (comme `POST /api/data`) sont **protégées** par un middleware (`isAdminLoggedIn.js`)
