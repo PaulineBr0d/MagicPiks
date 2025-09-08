@@ -2,12 +2,22 @@
 
 ## Description
 
-Ce projet constitue le **backend** de l'application web **MagicPiks**, qui permet la gestion et l'affichage de randonnées avec images.  
-Il expose une **API REST** développée avec **Node.js**, **Express**, et **MongoDB**, et gère également l’authentification de l’administrateur.
+Dans le cadre du début de ma formation **Concepteur Développeur d'Applications**, ce projet constitue le **backend** de l'application web **MagicPiks**.
 
-- Stockage des données : **MongoDB Atlas**
-- Stockage des images : **Cloudinary**
-- Déploiement : **Render**
+Il s'agit d'une API REST développée en **Node.js** avec **Express**, permettant de gérer une base de données de randonnées (titre, description, lieu, difficulté, tags, images, etc.).  
+Les données sont stockées dans **MongoDB Atlas**, et les images sont hébergées sur **Cloudinary**.  
+L'application intègre également un système d’**authentification administrateur** sécurisé avec sessions et cookies.
+
+L'API est déployée en ligne via **Render** et consommée par un frontend en **JavaScript Vanilla**.
+
+### Technologies utilisées
+
+- **Base de données** : MongoDB Atlas  
+- **Serveur web/API** : Node.js + Express  
+- **Stockage d’images** : Cloudinary  
+- **Déploiement** : Render  
+- **Authentification et middleware** : express-session, bcrypt, cors
+
 
 ---
 
