@@ -5,24 +5,39 @@ const path = require('path');
 
 const app = express();  
 
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "https://paulinebr0d.github.io"
+];
 // Configuration de la session dans Express
 const session = require('express-session');
 
 // Middleware
 app.use(cors({
-  origin: "https://paulinebr0d.github.io",
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
 app.set("trust proxy", 1);
 
+
+const isProduction = process.env.NODE_ENV === "production";
+
 app.use(session({
-  secret: process.env.SESSION_SECRET, // clé secrète pour signer les cookies
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-cookie: { 
-    secure: true,
+  cookie: {
+    secure: isProduction, // true uniquement en production
     httpOnly: true,
-    sameSite: 'none'
+    sameSite: isProduction ? 'none' : 'lax' // 'lax' en dev pour éviter les problèmes CORS
   }
 }));
 
