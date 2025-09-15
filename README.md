@@ -12,10 +12,10 @@ L'API est déployée en ligne via **Render** et consommée par un frontend en **
 
 ### Technologies utilisées
 
-- **Base de données** : MongoDB Atlas  
-- **Serveur web/API** : Node.js + Express  
-- **Stockage d’images** : Cloudinary  
-- **Déploiement** : Render  
+- **Base de données** : MongoDB Atlas (Base NoSQL adaptée aux données flexibles comme des randonnées (tags, images, etc.) pour plus de souplesse et de rapidité de développement vs une base relationnelle comme MySQL.)
+- **Serveur web/API** : Node.js + Express (Framework léger, minimaliste et performant pour développer rapidement une API REST) 
+- **Stockage d’images** : Cloudinary (pour un hébergement d’images optimisé, avec redimensionnement dynamique)
+- **Déploiement** : Render (qui permet de déployer gratuitement une API Node.js avec MongoDB Atlas) 
 - **Authentification et middleware** : express-session, bcrypt, cors
 
 
