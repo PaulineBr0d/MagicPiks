@@ -4,8 +4,7 @@
   "description": "Blog avec Express et MongoDB",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "generate-data": "node src/generateDataJson.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +15,6 @@
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "mongodb": "^6.18.0",
-    "mongoose": "^8.17.0",
-    "node-fetch": "^3.3.2"
+    "mongoose": "^8.17.0"
   }
 }
