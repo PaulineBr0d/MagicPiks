@@ -2,12 +2,14 @@ const express = require("express");
 const router = express.Router();
 const Data = require("./data");
 const isAdminLoggedIn = require('./isAdminLoggedIn');
+const { exec } = require('child_process'); 
 
 // Ajouter une entrée
 router.post("/", isAdminLoggedIn, async (req, res) => {
   try {
     const newEntry = new Data(req.body);
     const saved = await newEntry.save();
+
     res.status(201).json(saved);
   } catch (err) {
     res.status(400).json({ message: err.message });

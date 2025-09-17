@@ -81,14 +81,26 @@ app.use((err, req, res, next) => {
 
 // Connexion à la base et lancement du serveur
 const db = require("./src/db");
-/*const seedDatabase = require("./src/seed");*/
+const { exec } = require('child_process');
+
 
 db.connectToDatabase()
-  .then(async () => {
-    /*await seedDatabase();*/ // si nécessaire
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
-      console.log(`Serveur en cours d'exécution sur le port ${PORT}`);
+  .then(() => {
+    console.log("Connexion à la base réussie");
+    exec('node scripts/generateDataJson.js', (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Erreur génération data.json: ${error.message}`);
+        process.exit(1);
+      }
+      if (stderr) {
+        console.error(`stderr: ${stderr}`);
+      }
+      console.log(`data.json généré avec succès : ${stdout}`);
+
+      const PORT = process.env.PORT || 3000;
+      app.listen(PORT, () => {
+        console.log(`Serveur en cours d'exécution sur le port ${PORT}`);
+      });
     });
   })
   .catch((err) => {

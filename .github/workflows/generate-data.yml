@@ -1,0 +1,48 @@
+name: Générer et push data.json dans le frontend 
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout backend repo
+        uses: actions/checkout@v3
+        # Si backend est un repo différent, ajouter repository: user/backend-repo
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate data.json
+        run: node scripts/generateDataJson.js
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
+      - name: Checkout frontend repo
+        uses: actions/checkout@v3
+        with:
+          repository: PaulineBr0d/blog
+          path: blog-frontend
+          token: ${{ secrets.GH_FRONT_REPO_TOKEN }}
+
+      - name: Copier le fichier data.json
+        run: |
+          cp data.json blog-frontend/public/data.json
+
+      - name: Commit & push
+        run: |
+          cd blog-frontend
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add public/data.json
+          git commit -m "Mise à jour automatique de data.json [GitHub Action]" || echo "Rien à commit"
+          git push
