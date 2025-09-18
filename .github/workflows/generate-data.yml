@@ -34,7 +34,7 @@ jobs:
 
       - name: Copier le fichier data.json
         run: |
-          cp data.json blog-frontend/public/data.json
+          cp  public/data.json blog-frontend/public/data.json
 
       - name: Commit & push
         run: |
