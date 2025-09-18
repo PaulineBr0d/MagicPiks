@@ -1,24 +1,28 @@
-const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
+const https = require('https'); 
 require('dotenv').config();
 
-const Data = require('../src/data'); // 
 
-async function connectDB() {
-  await mongoose.connect(process.env.MONGODB_URI);
-}
+const API_URL = 'https://magicpiks.onrender.com/api/data';
 
 async function generateDataJSON() {
   try {
-    await connectDB();
-    const data = await Data.find().lean();
+    const response = await fetch(API_URL, {
+      agent: new https.Agent({ rejectUnauthorized: false }) 
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erreur API : ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
 
     const filePath = path.join(__dirname, '../public/data.json');
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
 
-    console.log('Fichier data.json généré');
+    console.log('Fichier data.json généré depuis l’API');
     process.exit(0);
   } catch (err) {
     console.error('Erreur génération data.json :', err);

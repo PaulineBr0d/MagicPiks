@@ -81,28 +81,17 @@ app.use((err, req, res, next) => {
 
 // Connexion à la base et lancement du serveur
 const db = require("./src/db");
-const { exec } = require('child_process');
 
 
 db.connectToDatabase()
   .then(() => {
     console.log("Connexion à la base réussie");
-    exec('node scripts/generateDataJson.js', (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Erreur génération data.json: ${error.message}`);
-        process.exit(1);
-      }
-      if (stderr) {
-        console.error(`stderr: ${stderr}`);
-      }
-      console.log(`data.json généré avec succès : ${stdout}`);
-
+    
       const PORT = process.env.PORT || 3000;
       app.listen(PORT, () => {
         console.log(`Serveur en cours d'exécution sur le port ${PORT}`);
       });
-    });
-  })
+    })
   .catch((err) => {
     console.error("Erreur de connexion à MongoDB :", err.message);
     process.exit(1);

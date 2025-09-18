@@ -2,8 +2,6 @@ name: Générer et push data.json dans le frontend
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 2 * * *'
 
 jobs:
   build:
